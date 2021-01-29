@@ -8,7 +8,8 @@ public class MonsterManager : SingleTonMonoBehaviour<MonsterManager>
     public enum eMonsterCategory
     {
         Skeleton,
-        Skeleton_Soldier
+        Skeleton_Soldier,
+        Witch
     }
     #endregion
 

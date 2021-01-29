@@ -90,10 +90,7 @@ public class Monster : FSM<Monster>
         m_navMash = GetComponent<NavMeshAgent>();
         m_animCurve = GetComponent<MoveAnimCurve>();
         m_animController = GetComponent<MonsterAnimController>();
-        m_attackArea = GetComponentInChildren<AttackArea>();
         m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
-        m_attackArea.SetType(AttackArea.eAttackType.Monster);
     }
 
     // Update is called once per frame

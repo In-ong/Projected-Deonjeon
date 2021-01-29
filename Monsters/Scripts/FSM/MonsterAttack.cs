@@ -16,6 +16,11 @@ public class MonsterAttack : FSMSingleton<MonsterAttack>, IFSMState<Monster>
             if (monster.AnimController.GetAnimState() != MonsterAnimController.eAnimState.ATTACK_STING)
                 monster.AnimController.Play(MonsterAnimController.eAnimState.ATTACK_STING);
         }
+        else if(monster.MonsterCategory == MonsterManager.eMonsterCategory.Witch)
+        {
+            if (monster.AnimController.GetAnimState() != MonsterAnimController.eAnimState.ATTACK_MAGIC)
+                monster.AnimController.Play(MonsterAnimController.eAnimState.ATTACK_MAGIC);
+        }
     }
 
     public void Execute(Monster monster)

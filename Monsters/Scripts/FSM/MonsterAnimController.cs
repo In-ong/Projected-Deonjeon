@@ -12,6 +12,7 @@ public class MonsterAnimController : AnimController
         LEFTMOVE,
         ATTACK,
         ATTACK_STING,
+        ATTACK_MAGIC,
         HIT,
         DIE
     }

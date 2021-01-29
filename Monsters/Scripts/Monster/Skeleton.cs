@@ -9,6 +9,9 @@ public class Skeleton : Monster
     {
         base.OnAwake();
 
+        m_attackArea = GetComponentInChildren<AttackArea>();
+        m_attackArea.SetType(AttackArea.eAttackType.Monster);
+
         m_animCurve.SetType(MoveAnimCurve.eMoveType.NavMeshAgent);
 
         InitField(MonsterManager.eMonsterCategory.Skeleton, 3, 1, 1.9f, 5f, 0.5f);
