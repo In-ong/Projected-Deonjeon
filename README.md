@@ -6,8 +6,5 @@ This is Portfolio. So Private Source Code.
 2. Add Item Create / Item AchieveSystem
 
 ### 2021.01.29
-1. Add Monster_Witch
-  
+1. Add Monster_Witch  
   Status / Animation
-  
-2.
