@@ -7,10 +7,10 @@ This is Portfolio. So Private Source Code.
 
 ### 2021.01.29
 1. Add Monster_Witch  
-> Status / Animation
+* Status / Animation
 2. Add FX
-> FireBall
-> > 1. No Code
-
-> Manager
-> > 1. GameObjectPool(One Prefab)
+* FireBall
+  * No Code
+  * Create interface(IFX)
+* Manager
+  * GameObjectPool(One Prefab)
