@@ -17,7 +17,7 @@ public class UI_InGame : SingleTonMonoBehaviour<UI_InGame>
     int m_count = 1;
 
     Player m_player;
-    GameObject m_statusPrefab;
+    [SerializeField] GameObject m_statusPrefab;
     GameObject m_statusGrid;
 
     List<Image> m_statusList = new List<Image>();
@@ -394,13 +394,19 @@ public class UI_InGame : SingleTonMonoBehaviour<UI_InGame>
     {
         if (m_keyCodeDic.Count != 0)
         {
-            if (slot == m_keyCodeDic[KeyCode.A])
+            if (m_keyCodeDic[KeyCode.A] != null)
             {
-                m_itemCountDic[KeyCode.A].text = slot.ItemCount.text;
+                if (slot == m_keyCodeDic[KeyCode.A])
+                {
+                    m_itemCountDic[KeyCode.A].text = slot.ItemCount.text;
+                }
             }
-            else if (slot == m_keyCodeDic[KeyCode.S])
+            else if (m_keyCodeDic[KeyCode.S] != null)
             {
-                m_itemCountDic[KeyCode.S].text = slot.ItemCount.text;
+                if (slot == m_keyCodeDic[KeyCode.S])
+                {
+                    m_itemCountDic[KeyCode.S].text = slot.ItemCount.text;
+                }
             }
         }
     }
@@ -410,7 +416,6 @@ public class UI_InGame : SingleTonMonoBehaviour<UI_InGame>
     // Start is called before the first frame update
     protected override void OnStart()
     {
-        m_statusPrefab = Resources.Load("Prefab/UI/Image_Status") as GameObject;
         m_statusGrid = GameObject.Find("Grid_Status");
         m_player = GameObject.Find("Player").GetComponent<Player>();
 

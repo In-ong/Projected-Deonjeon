@@ -67,7 +67,6 @@ public class UI_EquipSlot : UI_ItemSlot
     protected override void OnAwake()
     {
         m_itemImage = GameObject.Find("Image_Equip").GetComponent<Image>();
-        m_itemIcon = Resources.LoadAll<Sprite>("SlotImage/Equip");
         m_itemCount = GetComponentInChildren<Text>();
 
         m_itemImage.gameObject.SetActive(false);

@@ -21,7 +21,7 @@ public class UI_ItemSlot : MonoBehaviour
     GameObject m_selectSlotSpr;
     protected Image m_itemImage;
     public Image ItemImage { get { return m_itemImage; } }
-    protected Sprite[] m_itemIcon;
+    [SerializeField] protected Sprite[] m_itemIcon;
     protected Text m_itemCount;
     public Text ItemCount { get { return m_itemCount; } set { m_itemCount = value; } }
 
@@ -190,7 +190,6 @@ public class UI_ItemSlot : MonoBehaviour
         m_keySelect = Util.FindChildObject(this.gameObject, "Image_KeySelect").GetComponentInChildren<Text>();
         m_itemImage = Util.FindChildObject(this.gameObject, "Image_Item").GetComponent<Image>();
         m_inventory = GameObject.Find("Panel_Inventory").GetComponent<UI_Inventory>();
-        m_itemIcon = Resources.LoadAll<Sprite>("SlotImage/Consume");
         m_itemCount = GetComponentInChildren<Text>();
 
         m_selectSlotSpr.SetActive(false);
