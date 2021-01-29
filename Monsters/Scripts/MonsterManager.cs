@@ -14,14 +14,7 @@ public class MonsterManager : SingleTonMonoBehaviour<MonsterManager>
     #endregion
 
     #region Unity Method
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
+    protected override void OnAwake()
     {
         
     }

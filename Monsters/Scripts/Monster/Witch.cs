@@ -9,9 +9,9 @@ public class Witch : Monster
     {
         base.OnAwake();
 
-        InitField(MonsterManager.eMonsterCategory.Witch, 2, 2, 3.6f, 5f, 1f);
+        InitField(MonsterManager.eMonsterCategory.Witch, 2, 2, 5f, 7f, 1f);
 
-        ChangeState(MonsterIdle.Instance);
+        InitState(this, MonsterIdle.Instance);
     }
     #endregion
 }

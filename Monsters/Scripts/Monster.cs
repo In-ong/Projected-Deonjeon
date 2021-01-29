@@ -56,12 +56,15 @@ public class Monster : FSM<Monster>
     #region AnimEvent
     public virtual void AnimEvent_Attack()
     {
-        m_attackArea.gameObject.SetActive(true);
+        if (m_attackArea != null)
+            m_attackArea.gameObject.SetActive(false);
     }
 
     public virtual void AnimEvent_AttackFinish()
     {
-        m_attackArea.gameObject.SetActive(false);
+        if(m_attackArea != null)
+            m_attackArea.gameObject.SetActive(false);
+
         ChangeState(MonsterIdle.Instance);
     }
     #endregion
