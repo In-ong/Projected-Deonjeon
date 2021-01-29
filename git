@@ -1,0 +1,48 @@
+[33mcommit 422ce7db25142ce306d4648e4219c16da771bfcd[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: InYong <ghkddkemf0612@gmail.com>
+Date:   Fri Jan 29 14:27:49 2021 +0900
+
+    Add Monster_Witch : Awake / Animation
+
+[33mcommit c83bd892a088b7717a138ced5db9f602e48eeff9[m
+Author: InYong <ghkddkemf0612@gmail.com>
+Date:   Fri Jan 29 13:50:07 2021 +0900
+
+    UI Prefabs and UI Images move other folder
+
+[33mcommit 896df7461419fff37505f37d95ab2118618638be[m
+Author: InYong <75293106+In-ong@users.noreply.github.com>
+Date:   Fri Jan 29 13:27:31 2021 +0900
+
+    Update README.md
+
+[33mcommit 24f49ebdaf7ef954b0269d413af149cd8f7e7c65[m
+Merge: 863da7d 695f0d7
+Author: InYong <ghkddkemf0612@gmail.com>
+Date:   Fri Jan 29 13:22:47 2021 +0900
+
+    Merge branch 'main' of https://github.com/In-ong/Projected-Deonjeon
+
+[33mcommit 863da7d91d6f25137d8478a8f06c2b9ef16b86e0[m
+Author: InYong <ghkddkemf0612@gmail.com>
+Date:   Fri Jan 29 13:16:23 2021 +0900
+
+    2021/01/27 add BuffSystem/ItemSystem
+
+[33mcommit 695f0d73109512f9dd33fa37964eb5af131dffe1[m
+Author: InYong <75293106+In-ong@users.noreply.github.com>
+Date:   Thu Jan 28 19:46:32 2021 +0900
+
+    Update README.md
+
+[33mcommit 427141a89f12171f2e04fcf0845637ac52229d2f[m
+Author: InYong <75293106+In-ong@users.noreply.github.com>
+Date:   Thu Jan 28 19:46:07 2021 +0900
+
+    Create README.md
+
+[33mcommit 326c7614ed314e65c285c69f3a57fca03d514690[m
+Author: InYong <ghkddkemf0612@gmail.com>
+Date:   Thu Jan 28 19:25:59 2021 +0900
+
+    Origin Source
