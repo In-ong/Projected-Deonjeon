@@ -389,6 +389,21 @@ public class UI_InGame : SingleTonMonoBehaviour<UI_InGame>
             }
         }
     }
+
+    public void PlusItem(UI_ItemSlot slot)
+    {
+        if (m_keyCodeDic.Count != 0)
+        {
+            if (slot == m_keyCodeDic[KeyCode.A])
+            {
+                m_itemCountDic[KeyCode.A].text = slot.ItemCount.text;
+            }
+            else if (slot == m_keyCodeDic[KeyCode.S])
+            {
+                m_itemCountDic[KeyCode.S].text = slot.ItemCount.text;
+            }
+        }
+    }
     #endregion
 
     #region Unity Method

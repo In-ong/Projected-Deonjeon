@@ -12,6 +12,7 @@ public class PlayerDeath : FSMSingleton<PlayerDeath>,IFSMState<Player>
 
     public void Execute(Player player)
     {
+        player.Death = true;
         player.NavMesh.enabled = false;
     }
 

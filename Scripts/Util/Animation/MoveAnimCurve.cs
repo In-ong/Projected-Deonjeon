@@ -73,7 +73,7 @@ public class MoveAnimCurve : MonoBehaviour
                 transform.position = dest;
             else if (m_type == eMoveType.NavMeshAgent)
             {
-                m_navMesh.Move(dest - transform.position);
+                m_navMesh.SetDestination(dest);
             }
 
             if (m_time >= 1f)

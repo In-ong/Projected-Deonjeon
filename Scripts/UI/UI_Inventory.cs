@@ -202,6 +202,7 @@ public class UI_Inventory : MonoBehaviour
                         if (!m_consumeSlotList[i].FullItem())
                         {
                             m_consumeSlotList[i].SetItem(item);
+                            UI_InGame.Instance.PlusItem(m_consumeSlotList[i]);
                             break;
                         }
                     }
@@ -209,6 +210,7 @@ public class UI_Inventory : MonoBehaviour
                 else
                 {
                     m_consumeSlotList[i].SetItem(item);
+                    UI_InGame.Instance.PlusItem(m_consumeSlotList[i]);
                     break;
                 }
             }

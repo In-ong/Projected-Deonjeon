@@ -24,11 +24,10 @@ public class PlayerHit : FSMSingleton<PlayerHit>,IFSMState<Player>
             player.VerticalVecter -= player.Gravity * Time.deltaTime;
         }
         */
+        var hitDir = player.TargetTransform.position - player.transform.position;
+        hitDir = new Vector3(hitDir.x, 0f, hitDir.z);
 
-        Vector3 moveVector = new Vector3(0f, player.VerticalVecter, 0f);
-        player.NavMesh.Move(moveVector * Time.deltaTime);
-
-        player.GetAnimController().CurrentAnimEnd(() =>
+        player.GetAnimCurve().SetMove(player.transform.position, player.transform.position + (hitDir.normalized * -1f), player.GetAnimController().CurrentAnimPlayTime(), () =>
         {
             if (player.CurrentHp > 0)
             {

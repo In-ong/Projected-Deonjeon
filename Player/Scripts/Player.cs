@@ -11,6 +11,7 @@ public class Player : FSM<Player>
     #endregion
 
     #region Field
+    bool m_death;
     bool m_isCrash;
     bool m_isRun;
     bool m_isAttack;
@@ -54,6 +55,7 @@ public class Player : FSM<Player>
     #endregion
 
     #region Property
+    public bool Death { get { return m_death; } set { m_death = value; } }
     public bool IsCrash { get { return m_isCrash; } set { m_isCrash = value; } }
     public bool IsRun { get { return m_isRun; } set { m_isRun = value; } }
     public bool IsAttack { get { return m_isAttack; } set { m_isAttack = value; } }
@@ -230,12 +232,11 @@ public class Player : FSM<Player>
         FSMUpdate();
 
         #region UI 사용 시 커멘드 입력
-        /*
         if (!ItemManager.Instance.Inventory.gameObject.activeSelf)
         {
             if (Input.GetKeyDown(KeyCode.N))
             {
-                ItemManager.Instance.CreateTreasureBox(ItemManager.eCategory.Consume, transform.position + new Vector3(2f, 0f, 2f));
+                ItemManager.Instance.CreateTreasureBox(ItemManager.eCategory.Euipment, transform.position + new Vector3(2f, 0f, 2f));
             }
             if (Input.GetKeyDown(KeyCode.C))
                 ItemManager.Instance.ChangeWeapon(this);
@@ -263,23 +264,7 @@ public class Player : FSM<Player>
             else
                 UI_InGame.Instance.UsingItem(KeyCode.S, this);
         }
-        */
         #endregion
-
-        if (!ItemManager.Instance.Inventory.gameObject.activeSelf)
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                ItemManager.Instance.CreateTreasureBox(ItemManager.eCategory.Euipment, transform.position + new Vector3(2f, 0f, 2f));
-            }
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                if (!ItemManager.Instance.Inventory.gameObject.activeSelf)
-                    ItemManager.Instance.Inventory.OpenInventory();
-                else
-                    ItemManager.Instance.Inventory.ExitInvetory();
-            }
-        }
     }
     #endregion
 }

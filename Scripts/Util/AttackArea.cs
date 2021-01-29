@@ -13,6 +13,7 @@ public class AttackArea : MonoBehaviour
     #endregion
 
     #region Field
+    //[SerializeField] Monster m_monster;
     [SerializeField] Player m_player;
     [SerializeField] Monster m_monster;
     eAttackType m_type;
@@ -26,30 +27,29 @@ public class AttackArea : MonoBehaviour
     #endregion
 
     #region Unity Method
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("On");
-
-        if(collision.collider.CompareTag("Monster"))
+        if (other.CompareTag("Monster") && m_type == eAttackType.Player)
         {
-            var mon = collision.collider.gameObject.GetComponent<Monster>();
+            var mon = other.gameObject.GetComponent<Monster>();
 
             if (!mon.IsHit)
                 mon.ChangeState(MonsterHit.Instance);
         }
-        else if(collision.collider.CompareTag("Player"))
+
+        if (other.CompareTag("Player") && m_type == eAttackType.Monster)
         {
-            Debug.Log("Hit");
+            var player = other.gameObject.GetComponent<Player>();
 
-            var player = collision.collider.gameObject.GetComponent<Player>();
+            if (!player.IsCrash && !player.Death)
+            {
+                player.IsCrash = true;
 
-            //if (!player.IsDefence && !player.IsCrash)
-            //{
-            //    player.IsCrash = true;
+                player.TargetTransform = m_monster.transform;
 
-            //    player.SetDamage(m_monster.GhostAtk, m_monster.transform.position);
-            //    player.ChangeState(PlayerHit.Instance);
-            //}
+                player.SetDamage(m_monster.Atk, m_monster.transform.position);
+                player.ChangeState(PlayerHit.Instance);
+            }
             //else if (player.IsDefence && !player.IsCrash)
             //{
             //    player.IsCrash = true;
@@ -63,7 +63,7 @@ public class AttackArea : MonoBehaviour
     {
         if (m_type == eAttackType.Monster)
             m_monster = GetComponentInParent<Monster>();
-        if (m_type == eAttackType.Player)
+        else  if (m_type == eAttackType.Player)
             m_player = GetComponentInParent<Player>();
         
         
