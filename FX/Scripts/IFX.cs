@@ -4,5 +4,7 @@ using UnityEngine;
 
 public interface IFX
 {
-    void Effect(Player player);
+    void SetPosition(Vector3 pos);
+
+    void Effect(GameObject target);
 }

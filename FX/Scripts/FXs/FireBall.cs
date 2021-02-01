@@ -10,7 +10,20 @@ public class FireBall : MonoBehaviour, IFX
     #endregion
 
     #region Public Method
-    public void Effect(Player player)
+    public void SetMove(Vector3 targetPos)
+    {
+        m_animCurve.SetMove(transform.position, targetPos, 2f, () =>
+        {
+
+        });
+    }
+
+    public void SetPosition(Vector3 pos)
+    {
+        transform.position = pos;
+    }
+
+    public void Effect(GameObject target)
     {
 
     }
