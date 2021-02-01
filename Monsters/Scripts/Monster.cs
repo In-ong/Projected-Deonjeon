@@ -23,7 +23,7 @@ public class Monster : FSM<Monster>
     protected Vector3 m_hitDir;
 
     [SerializeField] protected AttackArea m_attackArea;
-    [SerializeField] Player m_player;
+    [SerializeField] protected Player m_player;
     NavMeshAgent m_navMash;
     MonsterAnimController m_animController;
     protected MoveAnimCurve m_animCurve;

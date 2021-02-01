@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1178510477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1178510478}
+  m_Layer: 8
+  m_Name: FireBall
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1178510478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178510477}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.38, y: 0.691, z: 0.793}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8338507015552890067}
+  m_RootOrder: 61
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8334253819518284770
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +42,7 @@ GameObject:
   m_Layer: 0
   m_Name: Dummy_Weapon
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -24,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8334253819518284770}
   m_LocalRotation: {x: -0.26382935, y: 0.23276943, z: -0.70524204, w: 0.6155048}
-  m_LocalPosition: {x: 0.152, y: 0.013, z: 0.109}
+  m_LocalPosition: {x: 0.116, y: 0.013, z: 0.068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8333818295215571371}
@@ -3885,6 +3915,7 @@ Transform:
   - {fileID: 8338571691594802289}
   - {fileID: 8333596170921985855}
   - {fileID: 8333546077024382781}
+  - {fileID: 1178510478}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 171.858, z: 0}
@@ -4003,6 +4034,8 @@ MonoBehaviour:
   m_isHit: 0
   m_attackArea: {fileID: 0}
   m_player: {fileID: 0}
+  m_dummy_weapon: {fileID: 8334253819518284770}
+  m_fireBall: {fileID: 1178510477}
 --- !u!1 &8335321917441353543
 GameObject:
   m_ObjectHideFlags: 0

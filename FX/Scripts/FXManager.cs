@@ -4,20 +4,44 @@ using UnityEngine;
 
 public class FXManager : SingleTonMonoBehaviour<FXManager>
 {
+    #region Enum
+    public enum eType
+    {
+        Static,
+        NoneStatic
+    }
+    #endregion
+
     #region Field
     [SerializeField] GameObject m_fxPrefab;
     GameObjectPool<IFX> m_fxPool;
+
+    List<IFX> m_fxList = new List<IFX>();
     #endregion
 
     #region Public Method
-    public void CreateFX()
+    public void CreateFX(GameObject parent)
     {
-        
+        var fx = m_fxPool.Get();
+        fx.SetPosition(parent);
+        m_fxList.Add(fx);
     }
 
     public void RemoveFX(IFX fx)
     {
+        fx.SetPosition(this.gameObject);
 
+        if (m_fxList.Remove(fx))
+            m_fxPool.Set(fx);
+    }
+
+    public void FxEffect(GameObject target)
+    {
+        for(int i = 0; i < m_fxList.Count; i++)
+        {
+            if (!m_fxList[i].OnEffect())
+                m_fxList[i].Effect(target);
+        }
     }
     #endregion
 
@@ -35,6 +59,8 @@ public class FXManager : SingleTonMonoBehaviour<FXManager>
 
             return fx;
         });
+
+        m_fxPool = pool;
     }
     #endregion
 }
