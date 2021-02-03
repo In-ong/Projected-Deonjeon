@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireBall : MonoBehaviour, IFX
+public class FireBall : MonoBehaviour, IFx
 {
     #region Field
     bool m_onShooting;
 
     [SerializeField] FXManager.eType m_type;
 
+    Monster m_monster;
     [SerializeField] MoveAnimCurve m_animCurve;
     #endregion
 
@@ -17,7 +18,8 @@ public class FireBall : MonoBehaviour, IFX
     {
         m_onShooting = true;
 
-        m_animCurve.SetMove(transform.position, new Vector3(targetPos.x, transform.position.y, targetPos.z), 0.5f, () =>
+        #region MoveAnimCurve
+        m_animCurve.SetMove(transform.position, targetPos, 1f, () =>
         {
             m_onShooting = false;
 
@@ -25,6 +27,7 @@ public class FireBall : MonoBehaviour, IFX
 
             gameObject.SetActive(false);
         });
+        #endregion
     }
     #endregion
 
@@ -65,7 +68,10 @@ public class FireBall : MonoBehaviour, IFX
         {
             m_onShooting = false;
 
+            m_animCurve.InitTime();
+
             FXManager.Instance.RemoveFX(this);
+            other.gameObject.GetComponent<Player>().ChangeState(PlayerHit.Instance);
 
             gameObject.SetActive(false);
         }
@@ -78,12 +84,6 @@ public class FireBall : MonoBehaviour, IFX
         m_animCurve.SetType(MoveAnimCurve.eMoveType.None);
 
         gameObject.SetActive(false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     #endregion
 }

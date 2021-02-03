@@ -11,12 +11,11 @@ public class FXManager : SingleTonMonoBehaviour<FXManager>
         NoneStatic
     }
     #endregion
-
     #region Field
     [SerializeField] GameObject m_fxPrefab;
-    GameObjectPool<IFX> m_fxPool;
+    GameObjectPool<IFx> m_fxPool;
 
-    List<IFX> m_fxList = new List<IFX>();
+    List<IFx> m_fxList = new List<IFx>();
     #endregion
 
     #region Public Method
@@ -27,7 +26,7 @@ public class FXManager : SingleTonMonoBehaviour<FXManager>
         m_fxList.Add(fx);
     }
 
-    public void RemoveFX(IFX fx)
+    public void RemoveFX(IFx fx)
     {
         fx.SetPosition(this.gameObject);
 
@@ -48,14 +47,14 @@ public class FXManager : SingleTonMonoBehaviour<FXManager>
     #region Unity Method
     protected override void OnAwake()
     {
-        GameObjectPool<IFX> pool = new GameObjectPool<IFX>(10, () =>
+        GameObjectPool<IFx> pool = new GameObjectPool<IFx>(1, () =>
         {
             var obj = Instantiate<GameObject>(m_fxPrefab);
             obj.transform.SetParent(transform);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localRotation = Quaternion.identity;
             obj.transform.localScale = Vector3.one;
-            var fx = obj.GetComponent<IFX>();
+            var fx = obj.GetComponent<IFx>();
 
             return fx;
         });

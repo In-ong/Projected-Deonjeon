@@ -41,7 +41,6 @@ public class Arrow : ItemController
     #region Unity Method
     private void OnTriggerEnter(Collider other)
     {
-        /*
         if(other.CompareTag("Monster"))
         {
             m_collider.isTrigger = false;
@@ -51,7 +50,7 @@ public class Arrow : ItemController
             other.GetComponent<Monster>().ChangeState(MonsterHit.Instance);
 
             ItemManager.Instance.RemoveConsumeItem(this);
-        }*/
+        }
     }
 
     protected override void OnStart()

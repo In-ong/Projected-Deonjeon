@@ -19,8 +19,13 @@ public class Witch : Monster
     public override void AnimEvent_Attack()
     {
         FXManager.Instance.FxEffect(m_player.gameObject);
+    }
 
+    public override void AnimEvent_AttackFinish()
+    {
         m_dummy_weapon.SetActive(false);
+
+        base.AnimEvent_AttackFinish();
     }
     #endregion
 

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IFX
+public interface IFx
 {
     bool OnEffect();
 
-    void SetPosition(GameObject parent);
-
     void Effect(GameObject target);
+
+    void SetPosition(GameObject target);
 }

@@ -23,7 +23,7 @@ public class MoveAnimCurve : MonoBehaviour
 
     #region Field
     float m_duration; //지속 시간
-    float m_time; //전체 시간
+    [SerializeField] float m_time; //전체 시간
 
     [SerializeField] CharacterController m_character;
     [SerializeField] NavMeshAgent m_navMesh;
@@ -52,6 +52,11 @@ public class MoveAnimCurve : MonoBehaviour
     public void SetType(eMoveType type)
     {
         m_type = type;
+    }
+
+    public void InitTime()
+    {
+        m_time = 0f;
     }
 
     public eMoveType GetMoveType()
