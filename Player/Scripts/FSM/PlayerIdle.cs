@@ -21,7 +21,13 @@ public class PlayerIdle : FSMSingleton<PlayerIdle>,IFSMState<Player>
                     player.TargetPos = Vector3.zero;
 
                     if (hit.collider.CompareTag("Monster"))
-                        player.TargetTransform = hit.transform;
+                    {
+                        for(int i =0; i < MonsterManager.Instance.GetFieldMonsterList().Count; i++)
+                        {
+                            if (hit.collider.transform == MonsterManager.Instance.GetFieldMonsterList()[i].transform)
+                                player.TargetTransform = MonsterManager.Instance.GetFieldMonsterList()[i].transform;
+                        }
+                    }
                     else
                         player.TargetPos = hit.point;
                 }

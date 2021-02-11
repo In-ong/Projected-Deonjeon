@@ -56,7 +56,13 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
                         player.GetItem = false;
 
                     if (hit.collider.CompareTag("Monster"))
-                        player.TargetTransform = hit.transform;
+                    {
+                        for (int i = 0; i < MonsterManager.Instance.GetFieldMonsterList().Count; i++)
+                        {
+                            if (hit.collider.transform == MonsterManager.Instance.GetFieldMonsterList()[i].transform)
+                                player.TargetTransform = MonsterManager.Instance.GetFieldMonsterList()[i].transform;
+                        }
+                    }
                     else if (hit.collider.CompareTag("Item"))
                     {
                         var item = hit.collider.gameObject.GetComponent<ItemController>();

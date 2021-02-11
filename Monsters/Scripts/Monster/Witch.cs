@@ -13,7 +13,7 @@ public class Witch : Monster
     public void Anim_AttackStart()
     {
         m_dummy_weapon.SetActive(true);
-        FXManager.Instance.CreateFX(m_dummy_weapon);
+        FXManager.Instance.CreateFX(FXManager.eFxCategory.FireBall, m_dummy_weapon.gameObject, this.gameObject);
     }
 
     public override void AnimEvent_Attack()

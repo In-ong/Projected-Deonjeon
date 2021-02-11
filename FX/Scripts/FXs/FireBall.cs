@@ -7,6 +7,7 @@ public class FireBall : MonoBehaviour, IFx
     #region Field
     bool m_onShooting;
 
+    [SerializeField] FXManager.eFxCategory m_category;
     [SerializeField] FXManager.eType m_type;
 
     Monster m_monster;
@@ -32,9 +33,19 @@ public class FireBall : MonoBehaviour, IFx
     #endregion
 
     #region Public Method
+    public FXManager.eFxCategory GetCategory()
+    {
+        return m_category;
+    }
+
     public bool OnEffect()
     {
         return m_onShooting;
+    }
+
+    public void SetParentGameObject(GameObject parent)
+    {
+        m_monster = parent.GetComponent<Monster>();
     }
 
     public void SetPosition(GameObject parent)
@@ -71,7 +82,13 @@ public class FireBall : MonoBehaviour, IFx
             m_animCurve.InitTime();
 
             FXManager.Instance.RemoveFX(this);
-            other.gameObject.GetComponent<Player>().ChangeState(PlayerHit.Instance);
+
+            var player = other.gameObject.GetComponent<Player>();
+            player.TargetTransform = m_monster.transform;
+            player.SetDamage(m_monster.Atk, m_monster.transform.position);
+            player.ChangeState(PlayerHit.Instance);
+
+            FXManager.Instance.CreateFX(FXManager.eFxCategory.FireExplosion, player.gameObject, player.gameObject);
 
             gameObject.SetActive(false);
         }
@@ -79,6 +96,7 @@ public class FireBall : MonoBehaviour, IFx
     // Start is called before the first frame update
     void Start()
     {
+        m_category = FXManager.eFxCategory.FireBall;
         m_type = FXManager.eType.NoneStatic;
         m_animCurve = GetComponent<MoveAnimCurve>();
         m_animCurve.SetType(MoveAnimCurve.eMoveType.None);
