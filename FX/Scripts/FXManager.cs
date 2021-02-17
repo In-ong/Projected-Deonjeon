@@ -47,7 +47,12 @@ public class FXManager : SingleTonMonoBehaviour<FXManager>
         for(int i = 0; i < m_fieldFxList.Count; i++)
         {
             if (!m_fieldFxList[i].OnEffect())
-                m_fieldFxList[i].Effect(target);
+            {
+                if (m_fieldFxList[i].GetFxType() == eType.NoneStatic)
+                    m_fieldFxList[i].Effect(target);
+                else
+                    m_fieldFxList[i].Effect(target);
+            }
         }
     }
     #endregion

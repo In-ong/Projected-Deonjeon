@@ -22,6 +22,8 @@ public class Monster : FSM<Monster>
     protected Vector3 m_moveDir;
     protected Vector3 m_hitDir;
 
+    protected Vector3 m_spawnPoint;
+    protected WayPoint[] m_wayPoints;
     [SerializeField] protected AttackArea m_attackArea;
     [SerializeField] protected Player m_player;
     NavMeshAgent m_navMash;
@@ -57,7 +59,7 @@ public class Monster : FSM<Monster>
     public virtual void AnimEvent_Attack()
     {
         if (m_attackArea != null)
-            m_attackArea.gameObject.SetActive(false);
+            m_attackArea.gameObject.SetActive(true);
     }
 
     public virtual void AnimEvent_AttackFinish()
@@ -78,6 +80,14 @@ public class Monster : FSM<Monster>
         m_attackSight = attackSight;
         m_detectedSight = detectedSight;
         m_delayTime = delayTime;
+    }
+    #endregion
+
+    #region Public Method
+    public void SetMonster(Vector3 spawn, WayPoint[] ways)
+    {
+        transform.position = spawn;
+        m_wayPoints = ways;
     }
     #endregion
 

@@ -24,32 +24,35 @@ public class MonsterIdle : FSMSingleton<MonsterIdle>, IFSMState<Monster>
     {
         monster.SearchDir = monster.Player.transform.position - monster.transform.position;
 
-        if (monster.Delay)
+        if (!monster.Player.Death)
         {
-            monster.MonsterTime += Time.deltaTime;
-            if (monster.DelayTime <= monster.MonsterTime)
+            if (monster.Delay)
             {
-                //레이를 사용해서 플레이어가 앞에 있는지 판단하는 거로 변경 필요
-                if ((monster.Player.transform.position - monster.transform.position).sqrMagnitude < monster.AttackSight * monster.AttackSight)
+                monster.MonsterTime += Time.deltaTime;
+                if (monster.DelayTime <= monster.MonsterTime)
                 {
-                    var dir = ((monster.Player.transform.position + Vector3.up * 1f) - (monster.transform.position + Vector3.up * 1f));
-
-                    if (Physics.Raycast(monster.transform.position + Vector3.up * 1f, dir.normalized, monster.AttackSight, 1 << LayerMask.NameToLayer("Player")))
+                    //레이를 사용해서 플레이어가 앞에 있는지 판단하는 거로 변경 필요
+                    if ((monster.Player.transform.position - monster.transform.position).sqrMagnitude < monster.AttackSight * monster.AttackSight)
                     {
-                        monster.ChangeState(MonsterAttack.Instance);
+                        var dir = ((monster.Player.transform.position + Vector3.up * 1f) - (monster.transform.position + Vector3.up * 1f));
+
+                        if (Physics.Raycast(monster.transform.position + Vector3.up * 1f, dir.normalized, monster.AttackSight, 1 << LayerMask.NameToLayer("Player")))
+                        {
+                            monster.ChangeState(MonsterAttack.Instance);
+                        }
+                        else
+                        {
+                            monster.transform.LookAt(monster.Player.transform);
+                            monster.ChangeState(MonsterAttack.Instance);
+                        }
                     }
                     else
-                    {
-                        monster.transform.LookAt(monster.Player.transform);
-                        monster.ChangeState(MonsterAttack.Instance);
-                    }
+                        ChangeMove(monster.SearchDir, monster);
                 }
-                else
-                    ChangeMove(monster.SearchDir, monster);
             }
+            else
+                ChangeMove(monster.SearchDir, monster);
         }
-        else
-            ChangeMove(monster.SearchDir, monster);
     }
 
     public void Exit(Monster monster)

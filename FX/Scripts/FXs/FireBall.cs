@@ -33,6 +33,11 @@ public class FireBall : MonoBehaviour, IFx
     #endregion
 
     #region Public Method
+    public FXManager.eType GetFxType()
+    {
+        return m_type;
+    }
+
     public FXManager.eFxCategory GetCategory()
     {
         return m_category;
@@ -77,19 +82,20 @@ public class FireBall : MonoBehaviour, IFx
     {
         if(other.CompareTag("Player"))
         {
-            m_onShooting = false;
+            var player = other.gameObject.GetComponent<Player>();
 
             m_animCurve.InitTime();
 
             FXManager.Instance.RemoveFX(this);
 
-            var player = other.gameObject.GetComponent<Player>();
             player.TargetTransform = m_monster.transform;
             player.SetDamage(m_monster.Atk, m_monster.transform.position);
             player.ChangeState(PlayerHit.Instance);
 
             FXManager.Instance.CreateFX(FXManager.eFxCategory.FireExplosion, player.gameObject, player.gameObject);
+            FXManager.Instance.FxEffect(null);
 
+            m_onShooting = false;
             gameObject.SetActive(false);
         }
     }

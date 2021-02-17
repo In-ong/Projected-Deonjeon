@@ -15,10 +15,15 @@ public class MonsterMove : FSMSingleton<MonsterMove>, IFSMState<Monster>
         monster.transform.LookAt(monster.Player.transform);
         monster.NavMashAgent.SetDestination(monster.Player.transform.position);
 
-        if ((monster.Player.transform.position - monster.transform.position).sqrMagnitude < monster.AttackSight * monster.AttackSight != Util.IsFloatEqual((monster.Player.transform.position - monster.transform.position).sqrMagnitude, monster.AttackSight * monster.AttackSight))
+        if (!monster.Player.Death)
         {
-            monster.ChangeState(MonsterAttack.Instance);
+            if ((monster.Player.transform.position - monster.transform.position).sqrMagnitude < monster.AttackSight * monster.AttackSight != Util.IsFloatEqual((monster.Player.transform.position - monster.transform.position).sqrMagnitude, monster.AttackSight * monster.AttackSight))
+            {
+                monster.ChangeState(MonsterAttack.Instance);
+            }
         }
+        else
+            monster.ChangeState(MonsterIdle.Instance);
     }
 
     public void Exit(Monster monster)

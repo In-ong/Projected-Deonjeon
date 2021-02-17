@@ -8,6 +8,23 @@ public class PlayerHit : FSMSingleton<PlayerHit>,IFSMState<Player>
     {
         if (player.GetAnimController().GetAnimState() != PlayerAnimController.eAnimState.HIT)
             player.GetAnimController().Play(PlayerAnimController.eAnimState.HIT, false);
+
+        var hitDir = player.transform.position - player.TargetTransform.position;
+        hitDir = new Vector3(hitDir.x, 0f, hitDir.z);
+
+        player.GetAnimCurve().SetMove(player.transform.position, player.transform.position + hitDir.normalized, 1f, () =>
+        {
+            if (player.CurrentHp > 0)
+            {
+                player.IsCrash = false;
+                player.ChangeState(PlayerIdle.Instance);
+            }
+            else if (player.CurrentHp <= 0)
+            {
+                player.IsCrash = false;
+                player.ChangeState(PlayerDeath.Instance);
+            }
+        });
     }
 
     public void Execute(Player player)
@@ -24,22 +41,6 @@ public class PlayerHit : FSMSingleton<PlayerHit>,IFSMState<Player>
             player.VerticalVecter -= player.Gravity * Time.deltaTime;
         }
         */
-        var hitDir = player.TargetTransform.position - player.transform.position;
-        hitDir = new Vector3(hitDir.x, 0f, hitDir.z);
-
-        player.GetAnimCurve().SetMove(player.transform.position, player.transform.position + (hitDir.normalized * -1f), player.GetAnimController().CurrentAnimPlayTime(), () =>
-        {
-            if (player.CurrentHp > 0)
-            {
-                player.IsCrash = false;
-                player.ChangeState(PlayerIdle.Instance);
-            }
-            else if (player.CurrentHp <= 0)
-            {
-                player.IsCrash = false;
-                player.ChangeState(PlayerDeath.Instance);
-            }
-        });
     }
 
     public void Exit(Player player)

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IFx
 {
+    FXManager.eType GetFxType();
     FXManager.eFxCategory GetCategory();
 
     bool OnEffect();
