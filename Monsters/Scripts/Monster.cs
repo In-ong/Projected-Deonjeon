@@ -16,6 +16,7 @@ public class Monster : FSM<Monster>
     [SerializeField] protected float m_delayTime;
     [SerializeField] protected float m_time;
 
+    [SerializeField] protected bool m_isPatrol;
     [SerializeField] protected bool m_delay;
     [SerializeField] protected bool m_isHit;
 
@@ -24,7 +25,7 @@ public class Monster : FSM<Monster>
     protected Vector3 m_hitDir;
 
     protected Vector3 m_spawnPoint;
-    protected WayPoint[] m_wayPoints;
+    [SerializeField] protected WayPoint[] m_wayPoints;
     [SerializeField] protected AttackArea m_attackArea;
     [SerializeField] protected Player m_player;
     NavMeshAgent m_navMash;
@@ -43,6 +44,7 @@ public class Monster : FSM<Monster>
     public float DelayTime { get { return m_delayTime; } }
     public float MonsterTime { get { return m_time; } set { m_time = value; } }
 
+    public bool IsPatrol { get { return m_isPatrol; } set { m_isPatrol = value; } }
     public bool Delay { get { return m_delay; } set { m_delay = value; } }
     public bool IsHit { get { return m_isHit; } set { m_isHit = value; } }
 
@@ -50,6 +52,7 @@ public class Monster : FSM<Monster>
     public Vector3 MoveDir { get { return m_moveDir; } set { m_moveDir = value; } }
     public Vector3 HitDir { get { return m_hitDir; } set { m_hitDir = value; } }
 
+    public WayPoint[] WayPoints { get { return m_wayPoints; } }
     public AttackArea AttackArea { get { return m_attackArea; } }
     public Player Player { get { return m_player; } }
     public NavMeshAgent NavMashAgent { get { return m_navMash; } }
@@ -88,6 +91,8 @@ public class Monster : FSM<Monster>
     #region Public Method
     public void SetMonster(Vector3 spawn, WayPoint[] ways)
     {
+        gameObject.SetActive(true);
+
         transform.position = spawn;
         m_wayPoints = ways;
     }
@@ -106,6 +111,9 @@ public class Monster : FSM<Monster>
         m_animCurve = GetComponent<MoveAnimCurve>();
         m_animController = GetComponent<MonsterAnimController>();
         m_player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        m_wayNum = 0;
+
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame

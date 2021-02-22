@@ -43,10 +43,10 @@ public class Field : MonoBehaviour
         {
             m_startList[(int)m_stageNum].gameObject.SetActive(false);
             //m_door[(int)m_stageNum].CloseDoor();
-            //for (int i = 0; i < m_spawnPoints[(int)m_stageNum].Length; i++)
-            //{
-            //    MonsterManager.Instance.CreateMonster(MonsterManager.eMonsterType.BlackGhost, i, m_spawnPoints[(int)m_stageNum][i].gameObject.transform.position, m_wayPoints[m_wayNum++]);
-            //}
+            for (int i = 0; i < m_spawnPoints[(int)m_stageNum].Length; i++)
+            {
+                MonsterManager.Instance.CreateMonsters(MonsterManager.eMonsterCategory.Skeleton, m_spawnPoints[(int)m_stageNum][i].gameObject.transform.position, m_wayPoints[m_wayNum++]);
+            }
         }
     }
 
@@ -78,14 +78,14 @@ public class Field : MonoBehaviour
         m_stages = GameObject.FindGameObjectsWithTag("Stage");
         foreach(var stage in m_stages)
         {
-            m_stageDic.Add(int.Parse(stage.name.Substring(5)), stage);
+            m_stageDic.Add(int.Parse(stage.name.Substring(6)), stage);
         }
 
         m_spawnPoints = new SpawnPoint[m_stageDic.Count][];
         for (int i = 0; i < m_stageDic.Count; i++)
         {
             m_spawnPoints[i] = m_stageDic[i].GetComponentsInChildren<SpawnPoint>();
-            //m_startList.Add(m_stageDic[i].GetComponentInChildren<StartBattle>());
+            m_startList.Add(m_stageDic[i].GetComponentInChildren<StartBattle>());
             for(int j = 0; j < m_spawnPoints[i].Length; j++) //WayPoint 다중 배열의 크기를 정할 int를 설정하기 위한 반복문
             {
                 m_spawnNum++;
@@ -101,7 +101,7 @@ public class Field : MonoBehaviour
         }
         m_wayNum = 0; //몬스터 생성에서 쓰기 위해 다시 0으로 돌려 놓음
 
-        InitField();
+        //InitField();
     }
 
     // Update is called once per frame

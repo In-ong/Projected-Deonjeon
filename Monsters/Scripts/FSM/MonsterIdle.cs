@@ -47,12 +47,18 @@ public class MonsterIdle : FSMSingleton<MonsterIdle>, IFSMState<Monster>
                         }
                     }
                     else
-                        ChangeMove(monster.SearchDir, monster);
+                    {
+                        monster.ChangeState(MonsterMove.Instance);
+                    }
                 }
             }
             else
-                ChangeMove(monster.SearchDir, monster);
+            {
+                monster.ChangeState(MonsterMove.Instance);
+            }
         }
+        else
+            monster.ChangeState(MonsterMove.Instance);
     }
 
     public void Exit(Monster monster)

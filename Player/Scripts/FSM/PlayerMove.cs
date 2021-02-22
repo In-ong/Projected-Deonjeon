@@ -94,7 +94,9 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
     #region Coroutine
     IEnumerator Coroutine_OnItem(Player player)
     {
-        player.ChangeState(PlayerIdle.Instance);
+        if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 1.4f)
+            player.ChangeState(PlayerIdle.Instance);
+
         yield return new WaitForSeconds(0.5f);
         if(player.IsBoxOpen)
         {
@@ -140,12 +142,15 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
                 player.transform.rotation = dir;
             }
 
-            if (player.Direction.sqrMagnitude <= player.NavMesh.stoppingDistance * player.NavMesh.stoppingDistance)
-                player.ChangeState(PlayerIdle.Instance);
+            //if (player.Direction.sqrMagnitude <= player.NavMesh.stoppingDistance * player.NavMesh.stoppingDistance)
+            //    player.ChangeState(PlayerIdle.Instance);
 
             //var moveVector = new Vector3(player.Direction.x, 0f, player.Direction.z);
 
             player.NavMesh.SetDestination(player.TargetTransform.position);
+
+            if(player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 0.3f)
+                player.ChangeState(PlayerIdle.Instance);
 
             ChangeAttack(player);
         }
@@ -164,14 +169,19 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
                 player.transform.rotation = dir;
             }
 
-            if (player.Direction.sqrMagnitude <= player.NavMesh.stoppingDistance * player.NavMesh.stoppingDistance)
-                player.ChangeState(PlayerIdle.Instance);
+            //if (player.Direction.sqrMagnitude <= player.NavMesh.stoppingDistance * player.NavMesh.stoppingDistance)
+            //    player.ChangeState(PlayerIdle.Instance);
 
             //var moveVector = new Vector3(player.Direction.x, 0f, player.Direction.z);
 
             player.NavMesh.SetDestination(player.TargetPos);
 
-            if (player.IsBoxOpen)
+            if (!player.IsBoxOpen && !player.GetItem)
+            {
+                if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 0.3f)
+                    player.ChangeState(PlayerIdle.Instance);
+            }
+            else if (player.IsBoxOpen)
             {
                 RaycastHit rayHit = new RaycastHit();
                 if(Physics.Raycast(player.transform.position, player.Direction.normalized, out rayHit, 1.4f, 1 << LayerMask.NameToLayer("Click")))
@@ -183,13 +193,19 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
                     }
                 }
             }
-            if(player.GetItem)
+            else if(player.GetItem)
             {
-                if (player.Direction.sqrMagnitude < 0.2f * 0.2f)
+                if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 0.3f)
                 {
                     ItemManager.Instance.RemoveConsumeItem(player.ItemController, player);
                     player.ChangeState(PlayerIdle.Instance);
                 }
+
+                //if (player.Direction.sqrMagnitude < 0.2f * 0.2f)
+                //{
+                //    ItemManager.Instance.RemoveConsumeItem(player.ItemController, player);
+                //    player.ChangeState(PlayerIdle.Instance);
+                //}
             }
         }
         
@@ -197,6 +213,8 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
 
     public void Exit(Player player)
     {
+        player.NavMesh.ResetPath();
+
         player.Direction = Vector3.zero;
         m_speed = 0f;
     }
