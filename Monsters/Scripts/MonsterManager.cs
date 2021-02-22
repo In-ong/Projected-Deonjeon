@@ -21,9 +21,11 @@ public class MonsterManager : SingleTonMonoBehaviour<MonsterManager>
     #endregion
 
     #region Public Method
-    public void CreateMonsters()
+    public void CreateMonsters(eMonsterCategory category, Vector3 spawn, WayPoint[] ways)
     {
-
+        var mon = m_monsterPoolDic[category].Get();
+        mon.SetMonster(spawn, ways);
+        m_fieldMonsterList.Add(mon);
     }
 
     public void RemoveMonsters(Monster monster)

@@ -10,6 +10,7 @@ public class Monster : FSM<Monster>
 
     [SerializeField] protected int m_hp;
     [SerializeField] protected int m_atk;
+    [SerializeField] protected int m_wayNum;
     [SerializeField] protected float m_attackSight;
     [SerializeField] protected float m_detectedSight;
     [SerializeField] protected float m_delayTime;
@@ -36,6 +37,7 @@ public class Monster : FSM<Monster>
 
     public int Hp { get { return m_hp; } set { m_hp = value; } }
     public int Atk { get { return m_atk; } set { m_atk = value; } }
+    public int WayNum { get { return m_wayNum; } set { m_wayNum = value; } }
     public float AttackSight { get { return m_attackSight; } }
     public float DetectedSight { get { return m_detectedSight; } }
     public float DelayTime { get { return m_delayTime; } }
