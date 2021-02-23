@@ -45,7 +45,7 @@ public class Field : MonoBehaviour
             //m_door[(int)m_stageNum].CloseDoor();
             for (int i = 0; i < m_spawnPoints[(int)m_stageNum].Length; i++)
             {
-                MonsterManager.Instance.CreateMonsters(MonsterManager.eMonsterCategory.Skeleton, m_spawnPoints[(int)m_stageNum][i].gameObject.transform.position, m_wayPoints[m_wayNum++]);
+                MonsterManager.Instance.CreateMonsters((MonsterManager.eMonsterCategory)Random.Range(0, 2), m_spawnPoints[(int)m_stageNum][i].gameObject.transform.position, m_wayPoints[m_wayNum++]);
             }
         }
     }
@@ -55,6 +55,7 @@ public class Field : MonoBehaviour
         //m_door[(int)m_stageNum].OpenDoor();
         OnPlayer = false;
         m_stageNum++;
+        m_wayNum = 0;
     }
     #endregion
 
