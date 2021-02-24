@@ -27,18 +27,22 @@ public class MonsterMove : FSMSingleton<MonsterMove>, IFSMState<Monster>
     {
         if(!IsTargetDetectedSight(monster))
         {
-            monster.IsPatrol = true;
-            monster.NavMashAgent.SetDestination(monster.WayPoints[monster.WayNum].transform.position);
-            //객체가 움직이고 있고 목적지에 도착했는 가를 확인
-            if(monster.NavMashAgent.velocity.sqrMagnitude >= 0.2f * 0.2f && monster.NavMashAgent.remainingDistance <= 0.3f)
+            if (monster.WayPoints != null)
             {
-                monster.NavMashAgent.isStopped = true;
-            }
+                monster.IsPatrol = true;
             
-            if(monster.NavMashAgent.isStopped)
-            {
-                monster.Delay = true;
-                monster.ChangeState(MonsterIdle.Instance);
+                monster.NavMashAgent.SetDestination(monster.WayPoints[monster.WayNum].transform.position);
+                //객체가 움직이고 있고 목적지에 도착했는 가를 확인
+                if (monster.NavMashAgent.velocity.sqrMagnitude >= 0.2f * 0.2f && monster.NavMashAgent.remainingDistance <= 0.3f)
+                {
+                    monster.NavMashAgent.isStopped = true;
+                }
+
+                if (monster.NavMashAgent.isStopped)
+                {
+                    monster.Delay = true;
+                    monster.ChangeState(MonsterIdle.Instance);
+                }
             }
         }
         else

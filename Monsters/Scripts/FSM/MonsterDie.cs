@@ -8,6 +8,12 @@ public class MonsterDie : FSMSingleton<MonsterAttack>, IFSMState<Monster>
     {
         if (monster.AnimController.GetAnimState() != MonsterAnimController.eAnimState.DIE)
             monster.AnimController.Play(MonsterAnimController.eAnimState.DIE);
+
+        monster.AnimController.CurrentAnimEnd(() =>
+        {
+            ItemManager.Instance.CreateConsumeItem(monster.transform.position);
+            MonsterManager.Instance.RemoveMonsters(monster);
+        });
     }
 
     public void Execute(Monster monster)

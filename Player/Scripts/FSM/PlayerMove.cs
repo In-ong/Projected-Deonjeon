@@ -94,9 +94,6 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
     #region Coroutine
     IEnumerator Coroutine_OnItem(Player player)
     {
-        if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 1.4f)
-            player.ChangeState(PlayerIdle.Instance);
-
         yield return new WaitForSeconds(0.5f);
         if(player.IsBoxOpen)
         {
@@ -183,15 +180,23 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
             }
             else if (player.IsBoxOpen)
             {
-                RaycastHit rayHit = new RaycastHit();
-                if(Physics.Raycast(player.transform.position, player.Direction.normalized, out rayHit, 1.4f, 1 << LayerMask.NameToLayer("Click")))
+                if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 1f)
                 {
-                    if(rayHit.collider.tag.Equals("Item"))
-                    {
-                        StopCoroutine(Coroutine_OnItem(player));
-                        StartCoroutine(Coroutine_OnItem(player));
-                    }
+                    StopCoroutine(Coroutine_OnItem(player));
+                    StartCoroutine(Coroutine_OnItem(player));
+
+                    player.ChangeState(PlayerIdle.Instance);
                 }
+
+                //RaycastHit rayHit = new RaycastHit();
+                //if(Physics.Raycast(player.transform.position, player.Direction.normalized, out rayHit, 1.4f, 1 << LayerMask.NameToLayer("Click")))
+                //{
+                //    if(rayHit.collider.tag.Equals("Item"))
+                //    {
+                //        StopCoroutine(Coroutine_OnItem(player));
+                //        StartCoroutine(Coroutine_OnItem(player));
+                //    }
+                //}
             }
             else if(player.GetItem)
             {

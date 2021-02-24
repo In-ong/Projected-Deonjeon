@@ -30,8 +30,13 @@ public class MonsterManager : SingleTonMonoBehaviour<MonsterManager>
 
     public void RemoveMonsters(Monster monster)
     {
+        monster.gameObject.SetActive(false);
+
         if (m_fieldMonsterList.Remove(monster))
             m_monsterPoolDic[monster.MonsterCategory].Set(monster);
+
+        if (m_fieldMonsterList.Count == 0)
+            Field.Instance.BattleEnd();
     }
 
     public List<Monster> GetFieldMonsterList()

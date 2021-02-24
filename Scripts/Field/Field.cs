@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Field : MonoBehaviour
+public class Field : SingleTonMonoBehaviour<Field>
 {
     #region Enum
     public enum eStage
@@ -70,14 +70,13 @@ public class Field : MonoBehaviour
     #endregion
 
     #region Unity Method
-    // Start is called before the first frame update
-    void Start()
+    protected override void OnStart()
     {
         //m_door = GetComponentsInChildren<Door>();
         //m_startPos = Util.FindChildObject(gameObject, "StartPosition").transform;
 
         m_stages = GameObject.FindGameObjectsWithTag("Stage");
-        foreach(var stage in m_stages)
+        foreach (var stage in m_stages)
         {
             m_stageDic.Add(int.Parse(stage.name.Substring(6)), stage);
         }
@@ -87,13 +86,13 @@ public class Field : MonoBehaviour
         {
             m_spawnPoints[i] = m_stageDic[i].GetComponentsInChildren<SpawnPoint>();
             m_startList.Add(m_stageDic[i].GetComponentInChildren<StartBattle>());
-            for(int j = 0; j < m_spawnPoints[i].Length; j++) //WayPoint 다중 배열의 크기를 정할 int를 설정하기 위한 반복문
+            for (int j = 0; j < m_spawnPoints[i].Length; j++) //WayPoint 다중 배열의 크기를 정할 int를 설정하기 위한 반복문
             {
                 m_spawnNum++;
             }
         }
         m_wayPoints = new WayPoint[m_spawnNum][];
-        for(int i = 0; i < m_stageDic.Count; i++)
+        for (int i = 0; i < m_stageDic.Count; i++)
         {
             for (int j = 0; j < m_spawnPoints[i].Length; j++)
             {
@@ -103,13 +102,6 @@ public class Field : MonoBehaviour
         m_wayNum = 0; //몬스터 생성에서 쓰기 위해 다시 0으로 돌려 놓음
 
         //InitField();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if (OnPlayer && (MonsterManager.Instance.MonsterList.Count == 0))
-        //    BattleEnd();
     }
     #endregion
 }
