@@ -3362,8 +3362,10 @@ GameObject:
   - component: {fileID: 1627716910331999}
   - component: {fileID: 4930493153931249386}
   - component: {fileID: 805257723}
+  - component: {fileID: 8327812078061355558}
+  - component: {fileID: 3231506919359873859}
   m_Layer: 8
-  m_Name: Monster_Skeleton
+  m_Name: Monster_Skeleton_0
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3513,12 +3515,15 @@ MonoBehaviour:
   m_monCategory: 0
   m_hp: 0
   m_atk: 0
+  m_wayNum: 0
   m_attackSight: 0
   m_detectedSight: 0
   m_delayTime: 0
   m_time: 0
+  m_isPatrol: 0
   m_delay: 0
   m_isHit: 0
+  m_wayPoints: []
   m_attackArea: {fileID: 0}
   m_player: {fileID: 0}
 --- !u!114 &805257723
@@ -3558,8 +3563,39 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   m_type: 0
+  m_time: 0
   m_character: {fileID: 0}
   m_navMesh: {fileID: 0}
+--- !u!136 &8327812078061355558
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929586719875759797}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5487213
+  m_Height: 2.077333
+  m_Direction: 1
+  m_Center: {x: 0.0021018386, y: 0.8568101, z: -2.3625355e-11}
+--- !u!54 &3231506919359873859
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929586719875759797}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4929587617919927361
 GameObject:
   m_ObjectHideFlags: 0

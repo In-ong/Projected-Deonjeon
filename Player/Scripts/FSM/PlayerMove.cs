@@ -18,18 +18,34 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
     {
         if (player.Sword.activeSelf)
         {
-            if (player.Direction.sqrMagnitude <= player.SwordAttackSight * player.SwordAttackSight || Util.IsFloatEqual(player.Direction.sqrMagnitude, player.SwordAttackSight * player.SwordAttackSight))
+            if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= player.SwordAttackSight)
+            {
+                player.NavMesh.isStopped = true;
+                player.NavMesh.velocity = Vector3.zero;
+
                 player.ChangeState(PlayerAttack.Instance);
+            }
         }
         else if(player.Bow.activeSelf)
         {
-            if (player.Direction.sqrMagnitude <= player.BowAttackStght * player.BowAttackStght || Util.IsFloatEqual(player.Direction.sqrMagnitude, player.BowAttackStght * player.BowAttackStght))
+            if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= player.SwordAttackSight)
+            {
+                player.NavMesh.isStopped = true;
+                player.NavMesh.velocity = Vector3.zero;
+
                 ItemManager.Instance.ShotArrow(player);
+            }
+            
         }
         else if(!player.Sword.activeSelf || !player.Bow.activeSelf)
         {
-            if (player.Direction.sqrMagnitude <= player.SwordAttackSight * player.SwordAttackSight || Util.IsFloatEqual(player.Direction.sqrMagnitude, player.SwordAttackSight * player.SwordAttackSight))
+            if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= player.SwordAttackSight)
+            {
+                player.NavMesh.isStopped = true;
+                player.NavMesh.velocity = Vector3.zero;
+
                 player.ChangeState(PlayerIdle.Instance);
+            }
         }
     }
 
@@ -146,10 +162,9 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
 
             player.NavMesh.SetDestination(player.TargetTransform.position);
 
-            if(player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 0.3f)
-                player.ChangeState(PlayerIdle.Instance);
-
             ChangeAttack(player);
+
+
         }
         else
         {
@@ -176,18 +191,26 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
             if (!player.IsBoxOpen && !player.GetItem)
             {
                 if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 0.3f)
+                {
+                    player.NavMesh.isStopped = true;
+                    player.NavMesh.velocity = Vector3.zero;
+
                     player.ChangeState(PlayerIdle.Instance);
+                }
             }
             else if (player.IsBoxOpen)
             {
                 if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 1f)
                 {
+                    player.NavMesh.isStopped = true;
+                    player.NavMesh.velocity = Vector3.zero;
+
                     StopCoroutine(Coroutine_OnItem(player));
                     StartCoroutine(Coroutine_OnItem(player));
 
                     player.ChangeState(PlayerIdle.Instance);
                 }
-
+                #region Ray를 통한 아이템 확인
                 //RaycastHit rayHit = new RaycastHit();
                 //if(Physics.Raycast(player.transform.position, player.Direction.normalized, out rayHit, 1.4f, 1 << LayerMask.NameToLayer("Click")))
                 //{
@@ -197,20 +220,18 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
                 //        StartCoroutine(Coroutine_OnItem(player));
                 //    }
                 //}
+                #endregion
             }
             else if(player.GetItem)
             {
                 if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 0.3f)
                 {
+                    player.NavMesh.isStopped = true;
+                    player.NavMesh.velocity = Vector3.zero;
+
                     ItemManager.Instance.RemoveConsumeItem(player.ItemController, player);
                     player.ChangeState(PlayerIdle.Instance);
                 }
-
-                //if (player.Direction.sqrMagnitude < 0.2f * 0.2f)
-                //{
-                //    ItemManager.Instance.RemoveConsumeItem(player.ItemController, player);
-                //    player.ChangeState(PlayerIdle.Instance);
-                //}
             }
         }
         

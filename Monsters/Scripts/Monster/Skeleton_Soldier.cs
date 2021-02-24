@@ -12,7 +12,7 @@ public class Skeleton_Soldier : Monster
         m_attackArea = GetComponentInChildren<AttackArea>();
         m_attackArea.SetType(AttackArea.eAttackType.Monster);
 
-        InitField(MonsterManager.eMonsterCategory.Skeleton_Soldier, 3, 2, 2.2f, 5f, 0.5f);
+        InitField(MonsterManager.eMonsterCategory.Skeleton_Soldier, 3, 2, 2.2f, 5f, 2f);
         InitState(this, MonsterIdle.Instance);
     }
     #endregion

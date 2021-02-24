@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterHit : FSMSingleton<MonsterAttack>, IFSMState<Monster>
+public class MonsterHit : FSMSingleton<MonsterHit>, IFSMState<Monster>
 {
     public void Enter(Monster monster)
     {
         monster.IsHit = true;
+
+        monster.Hp = monster.Hp - monster.Player.Atk;
 
         if (monster.AnimController.GetAnimState() != MonsterAnimController.eAnimState.HIT)
             monster.AnimController.Play(MonsterAnimController.eAnimState.HIT);
@@ -14,7 +16,7 @@ public class MonsterHit : FSMSingleton<MonsterAttack>, IFSMState<Monster>
         monster.HitDir = monster.Player.transform.position - monster.transform.position;
         monster.HitDir = new Vector3(monster.HitDir.x, 0f, monster.HitDir.z);
 
-        monster.MoveAnimCurve.SetMove(monster.transform.position, monster.transform.position + (monster.HitDir.normalized * 1f), monster.AnimController.CurrentAnimPlayTime(), () =>
+        monster.MoveAnimCurve.SetMove(monster.transform.position, monster.transform.position + monster.HitDir.normalized, 1f, () =>
         {
             if (monster.Hp <= 0)
                 monster.ChangeState(MonsterDie.Instance);

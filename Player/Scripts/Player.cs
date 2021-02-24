@@ -175,6 +175,8 @@ public class Player : FSM<Player>
         }
     }*/
     #endregion
+    #region 몬스터 직접 충돌
+    /*
     private void OnTriggerEnter(Collider other)
     {
         /*if (other.CompareTag("Monster") && !m_isCrash) //충돌 판정이 한 번만 이루어지도록 IsCrash가 꺼져있을 때만 작동하도록 설정
@@ -188,8 +190,9 @@ public class Player : FSM<Player>
                 ChangeState(PlayerHit.Instance);
                 mon.ChangeState(MonsterIdle.Instance);
             }
-        }*/
-    }
+        }
+    }*/
+    #endregion
     // Start is called before the first frame update
     void Awake()
     {
