@@ -28,7 +28,7 @@ public class Monster : FSM<Monster>
     [SerializeField] protected WayPoint[] m_wayPoints;
     [SerializeField] protected AttackArea m_attackArea;
     [SerializeField] protected Player m_player;
-    NavMeshAgent m_navMash;
+    [SerializeField] NavMeshAgent m_navMash;
     MonsterAnimController m_animController;
     protected MoveAnimCurve m_animCurve;
     #endregion
@@ -93,7 +93,7 @@ public class Monster : FSM<Monster>
     {
         gameObject.SetActive(true);
 
-        transform.position = spawn;
+        m_navMash.Warp(spawn);
         m_wayPoints = ways;
     }
     #endregion

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Field : SingleTonMonoBehaviour<Field>
 {
@@ -14,6 +15,7 @@ public class Field : SingleTonMonoBehaviour<Field>
 
     #region SerializeField
     [SerializeField] Player m_player;
+    [SerializeField] GameObject m_startZone;
     #endregion
 
     #region Field
@@ -27,6 +29,7 @@ public class Field : SingleTonMonoBehaviour<Field>
     GameObject[] m_stages;
     SpawnPoint[][] m_spawnPoints;
     WayPoint[][] m_wayPoints;
+    NavMeshSurface[] m_navMeshSurface;
 
     List<StartBattle> m_startList = new List<StartBattle>();
     Dictionary<int, GameObject> m_stageDic = new Dictionary<int, GameObject>();
@@ -42,10 +45,24 @@ public class Field : SingleTonMonoBehaviour<Field>
         if (!OnPlayer)
         {
             m_startList[(int)m_stageNum].gameObject.SetActive(false);
+            if(m_stageNum == 0)
+            {
+                var zoneMove = m_startZone.GetComponent<MoveAnimCurve>();
+                zoneMove.SetType(MoveAnimCurve.eMoveType.None);
+                zoneMove.SetMove(m_startZone.transform.position, new Vector3(m_startZone.transform.position.x, m_startZone.transform.position.y, m_startZone.transform.position.z + 10f), 1f, () =>
+                {
+                    for(int i = 0; i < m_navMeshSurface.Length; i++)
+                    {
+                        //실시간으로 bake된 정보를 지우고 새롭게 build하려면 사용되는 모델의 read/write를 적용시킴으로 바꿔놓아야 한다.
+                        m_navMeshSurface[i].RemoveData();
+                        m_navMeshSurface[i].BuildNavMesh();
+                    }
+                });
+            }
             //m_door[(int)m_stageNum].CloseDoor();
             for (int i = 0; i < m_spawnPoints[(int)m_stageNum].Length; i++)
             {
-                MonsterManager.Instance.CreateMonsters((MonsterManager.eMonsterCategory)Random.Range(0, 2), m_spawnPoints[(int)m_stageNum][i].gameObject.transform.position, m_wayPoints[m_wayNum++]);
+                MonsterManager.Instance.CreateMonsters((MonsterManager.eMonsterCategory)Random.Range(0, 1), m_spawnPoints[(int)m_stageNum][i].gameObject.transform.position, m_wayPoints[m_wayNum++]);
             }
         }
     }
@@ -74,6 +91,7 @@ public class Field : SingleTonMonoBehaviour<Field>
     {
         //m_door = GetComponentsInChildren<Door>();
         //m_startPos = Util.FindChildObject(gameObject, "StartPosition").transform;
+        m_navMeshSurface = GetComponents<NavMeshSurface>();
 
         m_stages = GameObject.FindGameObjectsWithTag("Stage");
         foreach (var stage in m_stages)

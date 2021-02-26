@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterManager : SingleTonMonoBehaviour<MonsterManager>
 {
@@ -46,7 +47,7 @@ public class MonsterManager : SingleTonMonoBehaviour<MonsterManager>
     #endregion
 
     #region Unity Method
-    protected override void OnAwake()
+    protected override void OnStart()
     {
         foreach(var mons in m_monsterPrefab)
         {

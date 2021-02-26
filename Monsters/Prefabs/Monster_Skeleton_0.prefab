@@ -3474,7 +3474,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4929586719875759797}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: -1372625422
   m_Radius: 0.7
   m_Speed: 3.5
   m_Acceleration: 8
@@ -3526,6 +3526,7 @@ MonoBehaviour:
   m_wayPoints: []
   m_attackArea: {fileID: 0}
   m_player: {fileID: 0}
+  m_navMash: {fileID: 0}
 --- !u!114 &805257723
 MonoBehaviour:
   m_ObjectHideFlags: 0
