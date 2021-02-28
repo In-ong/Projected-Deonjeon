@@ -27,12 +27,13 @@ public class Field : SingleTonMonoBehaviour<Field>
     Transform m_startPos;
     eStage m_stageNum;
     GameObject[] m_stages;
+    GameObject[] m_pathes;
     SpawnPoint[][] m_spawnPoints;
     WayPoint[][] m_wayPoints;
     NavMeshSurface[] m_navMeshSurface;
 
     List<StartBattle> m_startList = new List<StartBattle>();
-    Dictionary<int, GameObject> m_stageDic = new Dictionary<int, GameObject>();
+    //Dictionary<int, GameObject> m_stageDic = new Dictionary<int, GameObject>();
     #endregion
 
     #region Property
@@ -110,23 +111,24 @@ public class Field : SingleTonMonoBehaviour<Field>
         m_navMeshSurface = GetComponents<NavMeshSurface>();
 
         m_stages = GameObject.FindGameObjectsWithTag("Stage");
-        foreach (var stage in m_stages)
-        {
-            m_stageDic.Add(int.Parse(stage.name.Substring(6)), stage);
-        }
+        m_pathes = GameObject.FindGameObjectsWithTag("Path");
+        //foreach (var stage in m_stages)
+        //{
+        //    m_stageDic.Add(int.Parse(stage.name.Substring(6)), stage);
+        //}
 
-        m_spawnPoints = new SpawnPoint[m_stageDic.Count][];
-        for (int i = 0; i < m_stageDic.Count; i++)
+        m_spawnPoints = new SpawnPoint[m_stages.Length][];
+        for (int i = 0; i < m_stages.Length; i++)
         {
-            m_spawnPoints[i] = m_stageDic[i].GetComponentsInChildren<SpawnPoint>();
-            m_startList.Add(m_stageDic[i].GetComponentInChildren<StartBattle>());
+            m_spawnPoints[i] = m_stages[i].GetComponentsInChildren<SpawnPoint>();
+            m_startList.Add(m_stages[i].GetComponentInChildren<StartBattle>());
             for (int j = 0; j < m_spawnPoints[i].Length; j++) //WayPoint 다중 배열의 크기를 정할 int를 설정하기 위한 반복문
             {
                 m_spawnNum++;
             }
         }
         m_wayPoints = new WayPoint[m_spawnNum][];
-        for (int i = 0; i < m_stageDic.Count; i++)
+        for (int i = 0; i < m_stages.Length; i++)
         {
             for (int j = 0; j < m_spawnPoints[i].Length; j++)
             {
