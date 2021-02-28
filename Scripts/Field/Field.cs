@@ -44,6 +44,12 @@ public class Field : SingleTonMonoBehaviour<Field>
     {
         if (!OnPlayer)
         {
+            for (int i = 0; i < m_navMeshSurface.Length; i++)
+            {
+                if (m_navMeshSurface[i].agentTypeID != 0)
+                    m_navMeshSurface[i].enabled = true;
+            }
+
             m_startList[(int)m_stageNum].gameObject.SetActive(false);
             if(m_stageNum == 0)
             {
@@ -51,12 +57,16 @@ public class Field : SingleTonMonoBehaviour<Field>
                 zoneMove.SetType(MoveAnimCurve.eMoveType.None);
                 zoneMove.SetMove(m_startZone.transform.position, new Vector3(m_startZone.transform.position.x, m_startZone.transform.position.y, m_startZone.transform.position.z + 10f), 1f, () =>
                 {
-                    for(int i = 0; i < m_navMeshSurface.Length; i++)
+
+                    zoneMove.SetMove(m_startZone.transform.position, new Vector3(m_startZone.transform.position.x, m_startZone.transform.position.y - 30f, m_startZone.transform.position.z), 1f, () =>
                     {
-                        //실시간으로 bake된 정보를 지우고 새롭게 build하려면 사용되는 모델의 read/write를 적용시킴으로 바꿔놓아야 한다.
-                        m_navMeshSurface[i].RemoveData();
-                        m_navMeshSurface[i].BuildNavMesh();
-                    }
+                        for (int i = 0; i < m_navMeshSurface.Length; i++)
+                        {
+                            //실시간으로 bake된 정보를 지우고 새롭게 build하려면 사용되는 모델의 read/write를 적용시킴으로 바꿔놓아야 한다.
+                            m_navMeshSurface[i].RemoveData();
+                            m_navMeshSurface[i].BuildNavMesh();
+                        }
+                    });
                 });
             }
             //m_door[(int)m_stageNum].CloseDoor();
@@ -73,6 +83,12 @@ public class Field : SingleTonMonoBehaviour<Field>
         OnPlayer = false;
         m_stageNum++;
         m_wayNum = 0;
+
+        for (int i = 0; i < m_navMeshSurface.Length; i++)
+        {
+            if (m_navMeshSurface[i].agentTypeID != 0)
+                m_navMeshSurface[i].enabled = false;
+        }
     }
     #endregion
 
@@ -118,6 +134,12 @@ public class Field : SingleTonMonoBehaviour<Field>
             }
         }
         m_wayNum = 0; //몬스터 생성에서 쓰기 위해 다시 0으로 돌려 놓음
+
+        for(int i = 0; i < m_navMeshSurface.Length; i++)
+        {
+            if (m_navMeshSurface[i].agentTypeID != 0)
+                m_navMeshSurface[i].enabled = false;
+        }
 
         //InitField();
     }
