@@ -28,6 +28,7 @@ public class Field : SingleTonMonoBehaviour<Field>
     eStage m_stageNum;
     GameObject[] m_stages;
     GameObject[] m_pathes;
+    MoveAnimCurve[] m_pathMoveCurves;
     SpawnPoint[][] m_spawnPoints;
     WayPoint[][] m_wayPoints;
     NavMeshSurface[] m_navMeshSurface;
@@ -80,10 +81,20 @@ public class Field : SingleTonMonoBehaviour<Field>
 
     public void BattleEnd()
     {
+        m_pathMoveCurves[(int)m_stageNum].SetMove(m_pathes[(int)m_stageNum].transform.position, new Vector3(m_pathes[(int)m_stageNum].transform.position.x, m_pathes[(int)m_stageNum].transform.position.y + 20.7f, m_pathes[(int)m_stageNum].transform.position.z), 1f, () =>
+        {
+            for (int i = 0; i < m_navMeshSurface.Length; i++)
+            {
+                OnPlayer = false;
+                m_stageNum++;
+                m_wayNum = 0;
+
+                //실시간으로 bake된 정보를 지우고 새롭게 build하려면 사용되는 모델의 read/write를 적용시킴으로 바꿔놓아야 한다.
+                m_navMeshSurface[i].RemoveData();
+                m_navMeshSurface[i].BuildNavMesh();
+            }
+        });
         //m_door[(int)m_stageNum].OpenDoor();
-        OnPlayer = false;
-        m_stageNum++;
-        m_wayNum = 0;
 
         for (int i = 0; i < m_navMeshSurface.Length; i++)
         {
@@ -112,6 +123,12 @@ public class Field : SingleTonMonoBehaviour<Field>
 
         m_stages = GameObject.FindGameObjectsWithTag("Stage");
         m_pathes = GameObject.FindGameObjectsWithTag("Path");
+        m_pathMoveCurves = new MoveAnimCurve[m_pathes.Length];
+        for(int i = 0; i < m_pathes.Length; i++)
+        {
+            m_pathMoveCurves[i] = m_pathes[i].GetComponent<MoveAnimCurve>();
+            m_pathMoveCurves[i].SetType(MoveAnimCurve.eMoveType.None);
+        }
         //foreach (var stage in m_stages)
         //{
         //    m_stageDic.Add(int.Parse(stage.name.Substring(6)), stage);
