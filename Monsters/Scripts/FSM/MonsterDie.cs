@@ -15,7 +15,8 @@ public class MonsterDie : FSMSingleton<MonsterDie>, IFSMState<Monster>
         monster.AnimController.CurrentAnimEnd(() =>
         {
             ItemManager.Instance.CreateConsumeItem(monster.transform.position);
-            MonsterManager.Instance.RemoveMonsters(monster);
+            if(Field.Instance.OnPlayer)
+                MonsterManager.Instance.RemoveMonsters(monster);
         });
     }
 

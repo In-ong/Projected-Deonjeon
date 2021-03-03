@@ -59,6 +59,26 @@ public class ItemManager : SingleTonMonoBehaviour<ItemManager>
         consume.SetItem(pos);
         m_fieldItemList.Add(consume);
     }
+
+    public void CreateEquipItem(eItemType itemType, Transform pos)
+    {
+        for(int i = 0; i < m_equipmentItemList.Count; i++)
+        {
+            if(m_equipmentItemList[i].Type == itemType)
+            {
+                m_equipmentItemList[i].gameObject.SetActive(true);
+
+                m_equipmentItemList[i].transform.SetParent(pos);
+                m_equipmentItemList[i].transform.localPosition = Vector3.zero;
+                m_equipmentItemList[i].transform.localRotation = Quaternion.identity;
+                m_equipmentItemList[i].transform.localScale = Vector3.one;
+
+                m_invenItemList.Add(m_equipmentItemList[i]);
+                m_inventory.GetItem(m_equipmentItemList[i]);
+            }
+        }
+    }
+
     //보물상자에 아이템을 넣어서 생성하는 메소드
     public void CreateTreasureBox(eCategory category, Vector3 pos)
     {
@@ -89,7 +109,7 @@ public class ItemManager : SingleTonMonoBehaviour<ItemManager>
                 {
                     num++;
                 }
-                if(m_invenItemList[i].Type == eItemType.Bow)
+                else if(m_invenItemList[i].Type == eItemType.Bow)
                 {
                     num++;
                 }
@@ -110,7 +130,7 @@ public class ItemManager : SingleTonMonoBehaviour<ItemManager>
                 {
                     num++;
                 }
-                if (m_treasureList[i].Type == eItemType.Bow)
+                else if (m_treasureList[i].Type == eItemType.Bow)
                 {
                     num++;
                 }

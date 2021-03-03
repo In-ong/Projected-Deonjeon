@@ -20,12 +20,12 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0.16776432, g: 0.18970355, b: 0.24528301, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4387284, g: 0.4868793, b: 0.56714886, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -431,6 +431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Cave_Background_01_DoubleSided (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 144582, guid: abfef49904ba663439732a11d0ccd1d1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 469644, guid: abfef49904ba663439732a11d0ccd1d1, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -721,6 +725,10 @@ PrefabInstance:
     - target: {fileID: 115854, guid: 8cf8ee3bd823e3d4e9d8a79486574684, type: 3}
       propertyPath: m_Name
       value: SM_Env_Cave_Background_Corner_01 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 115854, guid: 8cf8ee3bd823e3d4e9d8a79486574684, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 446656, guid: 8cf8ee3bd823e3d4e9d8a79486574684, type: 3}
       propertyPath: m_RootOrder
@@ -1808,6 +1816,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Cave_Background_Corner_02_DoubleSided
       objectReference: {fileID: 0}
+    - target: {fileID: 124480, guid: d49776b2e97a2584f8d2b7c1b6fa81f9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 403160, guid: d49776b2e97a2584f8d2b7c1b6fa81f9, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2094,6 +2106,10 @@ PrefabInstance:
     - target: {fileID: 144582, guid: abfef49904ba663439732a11d0ccd1d1, type: 3}
       propertyPath: m_Name
       value: SM_Env_Cave_Background_01_DoubleSided
+      objectReference: {fileID: 0}
+    - target: {fileID: 144582, guid: abfef49904ba663439732a11d0ccd1d1, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 469644, guid: abfef49904ba663439732a11d0ccd1d1, type: 3}
       propertyPath: m_RootOrder
@@ -2739,7 +2755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &705507994
 Light:
   m_ObjectHideFlags: 0
@@ -3517,7 +3533,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896535096}
-  m_LocalRotation: {x: 0.0000000052472116, y: 0.9523661, z: -0.30495724, w: 0.000000016386776}
+  m_LocalRotation: {x: -0.000000012634085, y: 0.9523661, z: -0.30495724, w: -0.000000039455614}
   m_LocalPosition: {x: 7.5, y: 14.96, z: 27.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3619,6 +3635,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Cave_Background_Corner_02_DoubleSided (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 124480, guid: d49776b2e97a2584f8d2b7c1b6fa81f9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 403160, guid: d49776b2e97a2584f8d2b7c1b6fa81f9, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3700,7 +3720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 180244, guid: e076899ed4a6c8b44a7d4b881de19e27, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 4294967176
       objectReference: {fileID: 0}
     - target: {fileID: 445404, guid: e076899ed4a6c8b44a7d4b881de19e27, type: 3}
       propertyPath: m_RootOrder
@@ -3764,6 +3784,10 @@ PrefabInstance:
     - target: {fileID: 124480, guid: d49776b2e97a2584f8d2b7c1b6fa81f9, type: 3}
       propertyPath: m_Name
       value: SM_Env_Cave_Background_Corner_02_DoubleSided (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 124480, guid: d49776b2e97a2584f8d2b7c1b6fa81f9, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 403160, guid: d49776b2e97a2584f8d2b7c1b6fa81f9, type: 3}
       propertyPath: m_RootOrder
@@ -4115,7 +4139,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.0000000052472116, y: 0.9523661, z: -0.30495724, w: 0.000000016386776}
+  m_LocalRotation: {x: -0.000000012634085, y: 0.9523661, z: -0.30495724, w: -0.000000039455614}
   m_LocalPosition: {x: 7.5, y: 14.96, z: 27.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -5271,6 +5295,10 @@ PrefabInstance:
     - target: {fileID: 115854, guid: 8cf8ee3bd823e3d4e9d8a79486574684, type: 3}
       propertyPath: m_Name
       value: SM_Env_Cave_Background_Corner_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 115854, guid: 8cf8ee3bd823e3d4e9d8a79486574684, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 446656, guid: 8cf8ee3bd823e3d4e9d8a79486574684, type: 3}
       propertyPath: m_RootOrder
@@ -7438,6 +7466,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Env_Cave_Background_Corner_01
       objectReference: {fileID: 0}
+    - target: {fileID: 115854, guid: 8cf8ee3bd823e3d4e9d8a79486574684, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 446656, guid: 8cf8ee3bd823e3d4e9d8a79486574684, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -7640,7 +7672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1807858237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8712,7 +8744,7 @@ PrefabInstance:
     - target: {fileID: 6482412625426706367, guid: ec8a23947dfbe5644bb33e4f1cfec1b6,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6482412626207682201, guid: ec8a23947dfbe5644bb33e4f1cfec1b6,
         type: 3}

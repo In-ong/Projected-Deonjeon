@@ -212,7 +212,7 @@ public class Player : FSM<Player>
         //m_arrow = Util.FindChildObject(this.gameObject, "Dummy_Arrow");
 
         m_shield.SetActive(false);
-        m_sword.SetActive(false);
+        //m_sword.SetActive(false);
         m_bow.SetActive(false);
         //m_arrow.SetActive(false);
         m_acceptant_sword.SetActive(false);
@@ -226,7 +226,14 @@ public class Player : FSM<Player>
         m_curAtk = m_atk;
         m_level = 1;
 
+        
+
         InitState(this, PlayerIdle.Instance);
+    }
+
+    private void Start()
+    {
+        ItemManager.Instance.CreateEquipItem(ItemManager.eItemType.Sword, m_sword.transform);
     }
 
     // Update is called once per frame
