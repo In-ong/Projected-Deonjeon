@@ -34,7 +34,10 @@ public class MonsterManager : SingleTonMonoBehaviour<MonsterManager>
         monster.gameObject.SetActive(false);
 
         if (m_fieldMonsterList.Remove(monster))
+        {
             m_monsterPoolDic[monster.MonsterCategory].Set(monster);
+            monster.ChangeState(MonsterIdle.Instance);
+        }
 
         if (m_fieldMonsterList.Count == 0)
             Field.Instance.BattleEnd();
