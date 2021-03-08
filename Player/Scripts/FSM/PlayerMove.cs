@@ -200,7 +200,7 @@ public class PlayerMove : FSMSingleton<PlayerMove>, IFSMState<Player>
             }
             else if (player.IsBoxOpen)
             {
-                if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 1f)
+                if (player.NavMesh.velocity.sqrMagnitude >= 0.2f * 0.2f && player.NavMesh.remainingDistance <= 1.3f)
                 {
                     player.NavMesh.isStopped = true;
                     player.NavMesh.velocity = Vector3.zero;

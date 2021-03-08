@@ -94,6 +94,8 @@ public class Field : SingleTonMonoBehaviour<Field>
 
     public void BattleEnd()
     {
+        ItemManager.Instance.CreateTreasureBox(ItemManager.eCategory.Euipment, m_spawnPoints[(int)m_stageNum][0].transform.position);
+
         m_pathMoveCurves[(int)m_stageNum].SetMove(m_pathes[(int)m_stageNum].transform.position, new Vector3(m_pathes[(int)m_stageNum].transform.position.x, m_pathes[(int)m_stageNum].transform.position.y + 20f, m_pathes[(int)m_stageNum].transform.position.z), 1f, () =>
         {
             OnPlayer = false;

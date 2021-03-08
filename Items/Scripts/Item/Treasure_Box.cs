@@ -7,6 +7,11 @@ public class Treasure_Box : ItemController
     #region Field
     int m_num;
     public int Number { get { return m_num; } set { m_num = value; } }
+
+    [SerializeField] Animator m_animator;
+    [SerializeField] GameObject m_head;
+
+    public Animator BoxAnimator { get { return m_animator; } }
     #endregion
 
     #region Public Method
@@ -14,9 +19,11 @@ public class Treasure_Box : ItemController
     {
         gameObject.SetActive(true);
 
+        m_head.transform.rotation = Quaternion.identity;
+
         //보물상자가 여러 개 있을 경우 각각 들어 있는 보물을 관리하기 위해 번호를 매겨준다
         //번호는 보물 리스트의 총 갯수의 -1을 한 값
-        if(ItemManager.Instance.TreasureList.Count > 0)
+        if (ItemManager.Instance.TreasureList.Count > 0)
             m_num = ItemManager.Instance.TreasureList.Count - 1;
 
         transform.position = pos;
@@ -25,6 +32,8 @@ public class Treasure_Box : ItemController
 
     public void GetTreasure(Player player)
     {
+        //m_animator.SetTrigger("Open");
+
         var treasure = ItemManager.Instance.TreasureList[m_num];
         if (ItemManager.Instance.TreasureList.Remove(treasure))    
         {
@@ -106,6 +115,24 @@ public class Treasure_Box : ItemController
     #endregion
 
     #region Unity Method
+    protected override void OnAwake()
+    {
+        m_animator = GetComponent<Animator>();
 
+        m_head.transform.rotation = Quaternion.identity;
+
+        base.OnAwake();
+    }
+
+    private void Update()
+    {
+        if(m_animator.GetCurrentAnimatorStateInfo(0).IsName("Treasure Box Open"))
+        {
+            if (m_animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= m_animator.GetCurrentAnimatorStateInfo(0).length)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+    }
     #endregion
 }

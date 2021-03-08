@@ -108,6 +108,8 @@ GameObject:
   - component: {fileID: 64825463143806046}
   - component: {fileID: 478942944346855707}
   - component: {fileID: 466932408256306598}
+  - component: {fileID: 7242096062447311327}
+  - component: {fileID: 575300373790122654}
   m_Layer: 8
   m_Name: SM_Prop_Chest_0
   m_TagString: Item
@@ -219,3 +221,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb7e78e59e5ae154997291014d0af34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_head: {fileID: 119664}
+--- !u!95 &7242096062447311327
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133660}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 70ec73b28c2031043a21b5b819861460, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!65 &575300373790122654
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133660}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8520001, y: 0.77, z: 0.572}
+  m_Center: {x: 0, y: 0.37, z: -0.007}

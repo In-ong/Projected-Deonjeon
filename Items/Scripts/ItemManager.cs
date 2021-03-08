@@ -256,9 +256,10 @@ public class ItemManager : SingleTonMonoBehaviour<ItemManager>
 
     public void RemoveTreasureBox(Treasure_Box box, Player player)
     {
+        box.BoxAnimator.SetTrigger("Open");
         box.GetTreasure(player);
 
-        box.gameObject.SetActive(false);
+        //box.gameObject.SetActive(false);
         if (m_fieldItemList.Remove(box))
             m_consumeItemDic[box.Type].Set(box);
     }

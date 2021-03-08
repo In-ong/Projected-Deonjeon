@@ -63,9 +63,9 @@ public class Monster : FSM<Monster>
     #region AnimEvent
     public virtual void AnimEvent_Attack()
     {
-        if (m_attackArea != null)
+        if (!m_isHit)
         {
-            if(!m_isHit)
+            if (m_attackArea != null)
                 m_attackArea.gameObject.SetActive(true);
         }
     }

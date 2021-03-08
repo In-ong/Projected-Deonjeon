@@ -15,12 +15,12 @@ public class MonsterHit : FSMSingleton<MonsterHit>, IFSMState<Monster>
 
         monster.HitDir = monster.Player.transform.position - monster.transform.position;
 
-        Quaternion target = Quaternion.LookRotation(monster.HitDir);
+        Quaternion target = Quaternion.LookRotation(monster.HitDir.normalized);
         monster.transform.rotation = target;
 
         monster.HitDir = new Vector3(monster.HitDir.x, 0f, monster.HitDir.z);
 
-        monster.MoveAnimCurve.SetMove(monster.transform.position, monster.transform.position - monster.HitDir.normalized, monster.AnimController.CurrentAnimPlayTime(), () =>
+        monster.MoveAnimCurve.SetMove(monster.transform.position, monster.transform.position - monster.HitDir.normalized, 1f, () =>
         {
             if (monster.Hp <= 0)
                 monster.ChangeState(MonsterDie.Instance);
