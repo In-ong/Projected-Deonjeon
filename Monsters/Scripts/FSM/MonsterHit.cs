@@ -20,7 +20,7 @@ public class MonsterHit : FSMSingleton<MonsterHit>, IFSMState<Monster>
 
         monster.HitDir = new Vector3(monster.HitDir.x, 0f, monster.HitDir.z);
 
-        monster.MoveAnimCurve.SetMove(monster.transform.position, monster.transform.position - monster.HitDir.normalized, 1f, () =>
+        monster.MoveAnimCurve.SetMove(monster.transform.position, monster.transform.position - monster.HitDir.normalized, monster.AnimController.CurrentAnimPlayTime(), () =>
         {
             if (monster.Hp <= 0)
                 monster.ChangeState(MonsterDie.Instance);

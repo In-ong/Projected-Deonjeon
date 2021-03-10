@@ -18,8 +18,6 @@ public class MonsterDie : FSMSingleton<MonsterDie>, IFSMState<Monster>
             if (Field.Instance.OnPlayer)
             {
                 MonsterManager.Instance.RemoveMonsters(monster);
-
-                monster.ChangeState(MonsterIdle.Instance);
             }
         });
     }

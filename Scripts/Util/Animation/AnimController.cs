@@ -49,7 +49,7 @@ public class AnimController : MonoBehaviour
 
     public float CurrentAnimPlayTime()
     {
-        return m_anim.GetCurrentAnimatorStateInfo(0).length;
+        return m_anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
     }
     #endregion
 
