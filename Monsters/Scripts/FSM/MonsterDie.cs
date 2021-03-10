@@ -12,7 +12,7 @@ public class MonsterDie : FSMSingleton<MonsterDie>, IFSMState<Monster>
 
     public void Execute(Monster monster)
     {
-        monster.AnimController.CurrentAnimEnd(() =>
+        monster.AnimController.CurrentAnimEnd(MonsterAnimController.eAnimState.DIE.ToString(),() =>
         {
             ItemManager.Instance.CreateConsumeItem(monster.transform.position);
             if (Field.Instance.OnPlayer)

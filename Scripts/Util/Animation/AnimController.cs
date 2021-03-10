@@ -40,16 +40,19 @@ public class AnimController : MonoBehaviour
         m_anim.speed = 1f;
     }
 
-    public void CurrentAnimEnd(FinishFunc finishDel, float endTime = 0f) //애니메이션이 끝났을 때, 특정 이벤트를 실행하는 함수
+    public void CurrentAnimEnd(string animName, FinishFunc finishDel, float endTime = 0f) //애니메이션이 끝났을 때, 특정 이벤트를 실행하는 함수
     {
-        //endTime: 이벤트 함수가 나오는 타이밍이 맞지 않을 때 조절하기 위한 장치
-        if (m_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= m_anim.GetCurrentAnimatorStateInfo(0).length - endTime)
-            finishDel();
+        if (m_anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
+        {
+            //endTime: 이벤트 함수가 나오는 타이밍이 맞지 않을 때 조절하기 위한 장치
+            if (m_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= m_anim.GetCurrentAnimatorStateInfo(0).length - endTime)
+                finishDel();
+        }
     }
 
     public float CurrentAnimPlayTime()
     {
-        return m_anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        return m_anim.GetCurrentAnimatorStateInfo(0).length;
     }
     #endregion
 
