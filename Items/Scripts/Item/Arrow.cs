@@ -23,8 +23,8 @@ public class Arrow : ItemController
         transform.position = player.Arrow.transform.position;
         transform.rotation = player.Arrow.transform.rotation;
 
-        StopCoroutine(Coroutine_Shot(player.TargetTransform));
-        StartCoroutine(Coroutine_Shot(player.TargetTransform));
+        StopCoroutine(Coroutine_Shot(player.Target.transform));
+        StartCoroutine(Coroutine_Shot(player.Target.transform));
     }
     #endregion
 

@@ -14,6 +14,8 @@ public class MonsterDie : FSMSingleton<MonsterDie>, IFSMState<Monster>
     {
         monster.AnimController.CurrentAnimEnd(MonsterAnimController.eAnimState.DIE.ToString(),() =>
         {
+            monster.Death = false;
+
             ItemManager.Instance.CreateConsumeItem(monster.transform.position);
             if (Field.Instance.OnPlayer)
             {

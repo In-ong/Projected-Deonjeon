@@ -17,7 +17,7 @@ public class PlayerIdle : FSMSingleton<PlayerIdle>,IFSMState<Player>
 
                 if (Physics.Raycast(ray, out hit, 10000f, 1 << LayerMask.NameToLayer("Click")))
                 {
-                    player.TargetTransform = null;
+                    player.Target = null;
                     player.TargetPos = Vector3.zero;
 
                     if (hit.collider.CompareTag("Monster"))
@@ -25,16 +25,16 @@ public class PlayerIdle : FSMSingleton<PlayerIdle>,IFSMState<Player>
                         for(int i =0; i < MonsterManager.Instance.GetFieldMonsterList().Count; i++)
                         {
                             if (hit.collider.transform == MonsterManager.Instance.GetFieldMonsterList()[i].transform)
-                                player.TargetTransform = MonsterManager.Instance.GetFieldMonsterList()[i].transform;
+                                player.Target = MonsterManager.Instance.GetFieldMonsterList()[i];
                         }
                     }
                     else
                         player.TargetPos = hit.point;
                 }
 
-                if (player.TargetTransform != null)
+                if (player.Target != null)
                 {
-                    player.Direction = player.TargetTransform.position - player.transform.position;
+                    player.Direction = player.Target.transform.position - player.transform.position;
                     player.Direction = new Vector3(player.Direction.x, 0f, player.Direction.z);
                 }
                 else

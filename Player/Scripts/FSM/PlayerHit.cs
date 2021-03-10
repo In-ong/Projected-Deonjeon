@@ -9,7 +9,7 @@ public class PlayerHit : FSMSingleton<PlayerHit>,IFSMState<Player>
         if (player.GetAnimController().GetAnimState() != PlayerAnimController.eAnimState.HIT)
             player.GetAnimController().Play(PlayerAnimController.eAnimState.HIT, false);
 
-        var hitDir = player.transform.position - player.TargetTransform.position;
+        var hitDir = player.transform.position - player.Target.transform.position;
         hitDir = new Vector3(hitDir.x, 0f, hitDir.z);
 
         player.GetAnimCurve().SetMove(player.transform.position, player.transform.position + hitDir.normalized, 1f, () =>

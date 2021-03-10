@@ -19,6 +19,7 @@ public class Monster : FSM<Monster>
     [SerializeField] protected bool m_isPatrol;
     [SerializeField] protected bool m_delay;
     [SerializeField] protected bool m_isHit;
+    [SerializeField] protected bool m_isDeath;
 
     protected Vector3 m_searchDir;
     protected Vector3 m_moveDir;
@@ -47,6 +48,7 @@ public class Monster : FSM<Monster>
     public bool IsPatrol { get { return m_isPatrol; } set { m_isPatrol = value; } }
     public bool Delay { get { return m_delay; } set { m_delay = value; } }
     public bool IsHit { get { return m_isHit; } set { m_isHit = value; } }
+    public bool Death { get { return m_isDeath; } set { m_isDeath = value; } }
 
     public Vector3 SearchDir { get { return m_searchDir; } set { m_searchDir = value; } }
     public Vector3 MoveDir { get { return m_moveDir; } set { m_moveDir = value; } }

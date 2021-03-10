@@ -23,7 +23,11 @@ public class MonsterHit : FSMSingleton<MonsterHit>, IFSMState<Monster>
         monster.MoveAnimCurve.SetMove(monster.transform.position, monster.transform.position - monster.HitDir.normalized, 1f, () =>
         {
             if (monster.Hp <= 0)
+            {
+                monster.Death = true;
+
                 monster.ChangeState(MonsterDie.Instance);
+            }
             else
                 monster.ChangeState(MonsterIdle.Instance);
         });

@@ -41,7 +41,7 @@ public class Player : FSM<Player>
     GameObject m_acceptant_bow;
 
     RaycastHit m_hit;
-    Transform m_targetTransform;
+    Monster m_target;
     Treasure_Box m_treaureBox;
     //Monster m_monster;
     NavMeshAgent m_navMesh;
@@ -84,7 +84,7 @@ public class Player : FSM<Player>
     public GameObject Acceptant_Bow { get { return m_acceptant_bow; } }
     public GameObject Arrow { get { return m_arrow; } }
 
-    public Transform TargetTransform { get { return m_targetTransform; } set { m_targetTransform = value; } }
+    public Monster Target { get { return m_target; } set { m_target = value; } }
     public Treasure_Box Treasure_Box { get { return m_treaureBox; } set { m_treaureBox = value; } }
     public NavMeshAgent NavMesh { get { return m_navMesh; } }
     public Rigidbody RigidBody { get { return m_rigid; } }
@@ -246,7 +246,7 @@ public class Player : FSM<Player>
         {
             if (Input.GetKeyDown(KeyCode.N))
             {
-                ItemManager.Instance.CreateTreasureBox(ItemManager.eCategory.Euipment, transform.position + new Vector3(2f, 0f, 2f));
+                ItemManager.Instance.CreateTreasureBox(ItemManager.eCategory.Consume, transform.position + new Vector3(2f, 0f, 2f));
             }
             if (Input.GetKeyDown(KeyCode.C))
                 ItemManager.Instance.ChangeWeapon(this);

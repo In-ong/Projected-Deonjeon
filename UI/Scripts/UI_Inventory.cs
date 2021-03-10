@@ -325,7 +325,7 @@ public class UI_Inventory : MonoBehaviour
 
     #region Unity Method
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         m_backGround = GameObject.Find("UI_BackGround");
         m_consumeWindow = GameObject.Find("Consume_Content");

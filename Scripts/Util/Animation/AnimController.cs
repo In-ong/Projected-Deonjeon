@@ -40,8 +40,10 @@ public class AnimController : MonoBehaviour
         m_anim.speed = 1f;
     }
 
+    //이 함수는 업데이트에서 계속 확인해주어야 제대로 실행이 가능.
     public void CurrentAnimEnd(string animName, FinishFunc finishDel, float endTime = 0f) //애니메이션이 끝났을 때, 특정 이벤트를 실행하는 함수
     {
+        //현재 진행 중인 애니메이션을 확인. animName과 같은 이름이면 다음 코드를 실행토록한다.
         if (m_anim.GetCurrentAnimatorStateInfo(0).IsName(animName))
         {
             //endTime: 이벤트 함수가 나오는 타이밍이 맞지 않을 때 조절하기 위한 장치

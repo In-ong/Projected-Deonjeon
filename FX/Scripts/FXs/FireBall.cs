@@ -88,7 +88,7 @@ public class FireBall : MonoBehaviour, IFx
 
             FXManager.Instance.RemoveFX(this);
 
-            player.TargetTransform = m_monster.transform;
+            player.Target = m_monster;
             player.SetDamage(m_monster.Atk, m_monster.transform.position);
             player.ChangeState(PlayerHit.Instance);
 

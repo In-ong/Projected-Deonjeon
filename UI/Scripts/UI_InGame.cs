@@ -21,6 +21,7 @@ public class UI_InGame : SingleTonMonoBehaviour<UI_InGame>
     GameObject m_statusGrid;
 
     List<Image> m_statusList = new List<Image>();
+    List<Image> m_statusBackgroundList = new List<Image>();
     //키를 등록했을 때, 등록한 아이템 슬롯을 보관.
     Dictionary<KeyCode, UI_ItemSlot> m_keyCodeDic = new Dictionary<KeyCode, UI_ItemSlot>();
     //키마다 정해진 인게임 슬롯 이미지를 보관.
@@ -33,7 +34,9 @@ public class UI_InGame : SingleTonMonoBehaviour<UI_InGame>
     public void AddStatus()
     {
         GameObject obj = null;
-        Image image = null;
+        Image[] image = null;
+        int statusNum = 0;
+        int currentNum = 0;
 
         //우선 시작 시인지 아닌지를 구분.
         if (m_player.Hp - m_player.CurrentHp == 0)
@@ -44,38 +47,68 @@ public class UI_InGame : SingleTonMonoBehaviour<UI_InGame>
                 obj = Instantiate<GameObject>(m_statusPrefab);
                 obj.transform.SetParent(m_statusGrid.transform);
                 obj.transform.localScale = Vector3.one;
-                image = obj.GetComponent<Image>();
-                if (m_player.Hp - m_player.CurrentHp == 0)
-                    image.fillAmount = m_player.Hp * 0.5f;
-                else if (m_player.Hp - m_player.CurrentHp != 0)
-                    image.fillAmount = (m_player.Hp - m_player.CurrentHp) * 0.5f;
-                m_statusList.Add(image);
+                image = obj.GetComponentsInChildren<Image>();
+
+                for (int j = 0; j < image.Length; j++)
+                {
+                    if (m_player.Hp - m_player.CurrentHp == 0)
+                        image[j].fillAmount = m_player.Hp * 0.5f;
+                    else if (m_player.Hp - m_player.CurrentHp != 0)
+                        image[j].fillAmount = (m_player.Hp - m_player.CurrentHp) * 0.5f;
+                    if (statusNum == 0)
+                    {
+                        m_statusBackgroundList.Add(image[j]);
+
+                        statusNum++;
+                    }
+                    else
+                    {
+                        m_statusList.Add(image[j]);
+
+                        statusNum = 0;
+                    }
+                }
             }
         }
         else if (m_player.Hp - m_player.CurrentHp != 0)
         {
+            int num = m_player.Hp - m_player.CurrentHp;
+            currentNum = num;
+
             //변화한 체력이 짝수인지 홀수인지 구분.
-            if ((m_player.Hp - m_player.CurrentHp) % 2 == 0 && m_player.Hp - m_player.CurrentHp != 0)
+            if (num % 2 == 0 && num != 0)
             {
-                for (int i = 0; i < (m_player.Hp - m_player.CurrentHp) / 2; i++)
+                for (int i = 0; i < num / 2; i++)
                 {
                     obj = Instantiate<GameObject>(m_statusPrefab);
                     obj.transform.SetParent(m_statusGrid.transform);
                     obj.transform.localScale = m_statusList[0].transform.localScale;
-                    image = obj.GetComponent<Image>();
-                    if (m_player.Hp - m_player.CurrentHp == 0)
-                        image.fillAmount = m_player.Hp * 0.5f;
-                    else if (m_player.Hp - m_player.CurrentHp != 0)
-                        image.fillAmount = (m_player.Hp - m_player.CurrentHp) * 0.5f;
-                    m_statusList.Add(image);
+                    image = obj.GetComponentsInChildren<Image>();
+
+                    for (int j = 0; j < image.Length; j++)
+                    {
+                        image[j].fillAmount = currentNum * 0.5f;
+
+                        if (statusNum == 0)
+                        {
+                            m_statusBackgroundList.Add(image[j]);
+
+                            statusNum++;
+                        }
+                        else
+                        {
+                            m_statusList.Add(image[j]);
+
+                            currentNum -= 2;
+                            statusNum = 0;
+                        }
+                    }
                 }
             }
-            else if((m_player.Hp - m_player.CurrentHp) % 2 == 1)
+            else if(num % 2 == 1)
             {
-                int num = m_player.Hp - m_player.CurrentHp;
-
                 //반복문을 먼저 사용해야 증가가 제대로 적용됨.
-                for (int i = 0; i < ((m_player.Hp - m_player.CurrentHp) / 2) + 1; i++)
+                for (int i = 0; i < (num + 1) / 2; i++)
                 {
                     //홀수일 경우 마지막 하트가 채워져있는지부터 확인.
                     if (m_statusList[m_statusList.Count - 1].fillAmount == 1)
@@ -84,23 +117,38 @@ public class UI_InGame : SingleTonMonoBehaviour<UI_InGame>
                         obj = Instantiate<GameObject>(m_statusPrefab);
                         obj.transform.SetParent(m_statusGrid.transform);
                         obj.transform.localScale = m_statusList[0].transform.localScale;
-                        image = obj.GetComponent<Image>();
-                        if (m_player.Hp - m_player.CurrentHp == 0)
-                            image.fillAmount = m_player.Hp * 0.5f;
-                        else if (num != 0)
+                        image = obj.GetComponentsInChildren<Image>();
+
+                        for (int j = 0; j < image.Length; j++)
                         {
-                            image.fillAmount = num * 0.5f;
-                            num -= 2;
+                            image[j].fillAmount = currentNum * 0.5f;
+
+                            if (statusNum == 0)
+                            {
+                                m_statusBackgroundList.Add(image[j]);
+
+                                statusNum++;
+                            }
+                            else
+                            {
+                                m_statusList.Add(image[j]);
+
+                                currentNum -= 2;
+                                statusNum = 0;
+                            }
                         }
-                        m_statusList.Add(image);
                     }
                     else
                     {
                         //채워져 있지 않는다면 FillAmount를 변화시킨다.
-                        m_statusList[m_statusList.Count - 1].fillAmount += (m_player.Hp - m_player.CurrentHp) * 0.5f;
+                        m_statusList[m_statusList.Count - 1].fillAmount += (currentNum * 0.5f);
+
+                        currentNum -= 1;
                     }
                 }
             }
+
+            currentNum = 0;
         }
 
         #region Do 반복문
